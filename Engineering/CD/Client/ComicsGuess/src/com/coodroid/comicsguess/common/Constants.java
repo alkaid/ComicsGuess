@@ -16,7 +16,7 @@ public class Constants {
 	/** bundle传递数据时的key */
 	public static class bundleKey{
 		/** 需要弹出的信息*/
-		public static final String toastMag=com.alkaid.base.common.Constants.bundleKey.toastMag;
+		public static final String toastMag=com.alkaid.base.common.Constants.bundleKey.toastMsg;
 		/** 通用业务异常 */
 		public static final String exception=com.alkaid.base.common.Constants.bundleKey.exception;
 	}
