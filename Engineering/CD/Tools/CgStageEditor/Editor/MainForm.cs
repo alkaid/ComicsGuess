@@ -19,7 +19,8 @@ namespace Editor
 {
     public partial class MainForm : RibbonForm
     {
-        string dbPath = string.Empty;
+        private string dbPath = string.Empty;
+        private AllData allData;
         public MainForm()
         {
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace Editor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            
 
         }
 
@@ -57,10 +59,23 @@ namespace Editor
                 dbPath = ofd.FileName;
                 DbHelperSQLite.DbPath = dbPath;
             }
-            AllData allData = new AllData(AllData.FLAG_TABLE_stage | AllData.FLAG_TABLE_subject);
-            bindingSource1.DataSource = allData.dataSet;
-            gridControl.DataSource = bindingSource1;
-            gridControl.DataMember = "stage";
+            //AllData allData = new AllData(AllData.FLAG_TABLE_catalog | AllData.FLAG_TABLE_stage | AllData.FLAG_TABLE_subject);
+            //bindingSource1.DataSource = allData.dataSet;
+            //gridControl.DataSource = bindingSource1;
+            //gridControl.DataMember = "stage";
+            DataSet ds = (DataSet)fullDataBindingSource.DataSource;
+            allData = new AllData(ds);
+            //AllData.fill(ds, AllData.FLAG_TABLE_catalog | AllData.FLAG_TABLE_stage | AllData.FLAG_TABLE_subject);
+        }
+
+        private void iSave_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Base.BaseView view = gridControl.FocusedView;
+            if (!(view.PostEditor() && view.UpdateCurrentRow()))
+            {
+                return;
+            }
+            allData.update();
         }
 
     }

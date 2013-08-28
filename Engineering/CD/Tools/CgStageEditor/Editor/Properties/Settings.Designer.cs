@@ -22,5 +22,15 @@ namespace Editor.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"F:\\My Documents\\ComicsGuessTest.db\"")]
+        public string ComicsGuessTestConnectionString {
+            get {
+                return ((string)(this["ComicsGuessTestConnectionString"]));
+            }
+        }
     }
 }

@@ -29,10 +29,42 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colid1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colname1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colcatalog = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.catalogBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataSet = new Editor.fullDataSet();
+            this.colstageType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colunlocked = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colnearSubject = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colid = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.cardView1 = new DevExpress.XtraGrid.Views.Card.CardView();
+            this.colid2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltitle = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsubjectType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colcomicsType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colstage = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.collevel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colremark = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colresImg = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colresText = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colresAudio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colcreatdate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltip = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colselectors = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colanswer = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsorter = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colresolved = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.navBarControl = new DevExpress.XtraNavBar.NavBarControl();
             this.mailGroup = new DevExpress.XtraNavBar.NavBarGroup();
@@ -82,10 +114,15 @@
             this.helpRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.cardView1 = new DevExpress.XtraGrid.Views.Card.CardView();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.catalogBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).BeginInit();
@@ -98,31 +135,281 @@
             this.popupControlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cardView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colid1,
+            this.colname1,
+            this.colcatalog,
+            this.colstageType,
+            this.colunlocked,
+            this.colnearSubject});
+            this.gridView2.GridControl = this.gridControl;
+            this.gridView2.Name = "gridView2";
+            // 
+            // colid1
+            // 
+            this.colid1.FieldName = "id";
+            this.colid1.Name = "colid1";
+            this.colid1.OptionsColumn.AllowEdit = false;
+            this.colid1.Visible = true;
+            this.colid1.VisibleIndex = 0;
+            // 
+            // colname1
+            // 
+            this.colname1.FieldName = "name";
+            this.colname1.Name = "colname1";
+            this.colname1.Visible = true;
+            this.colname1.VisibleIndex = 1;
+            // 
+            // colcatalog
+            // 
+            this.colcatalog.ColumnEdit = this.repositoryItemLookUpEdit1;
+            this.colcatalog.FieldName = "catalog";
+            this.colcatalog.Name = "colcatalog";
+            this.colcatalog.Visible = true;
+            this.colcatalog.VisibleIndex = 2;
+            // 
+            // repositoryItemLookUpEdit1
+            // 
+            this.repositoryItemLookUpEdit1.AutoHeight = false;
+            this.repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit1.DataSource = this.catalogBindingSource;
+            this.repositoryItemLookUpEdit1.DisplayMember = "name";
+            this.repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
+            this.repositoryItemLookUpEdit1.ValueMember = "id";
+            // 
+            // catalogBindingSource
+            // 
+            this.catalogBindingSource.DataMember = "catalog";
+            this.catalogBindingSource.DataSource = this.fullDataBindingSource;
+            // 
+            // fullDataBindingSource
+            // 
+            this.fullDataBindingSource.DataSource = this.fullDataSet;
+            this.fullDataBindingSource.Position = 0;
+            // 
+            // fullDataSet
+            // 
+            this.fullDataSet.DataSetName = "fullDataSet";
+            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // colstageType
+            // 
+            this.colstageType.FieldName = "stageType";
+            this.colstageType.Name = "colstageType";
+            this.colstageType.Visible = true;
+            this.colstageType.VisibleIndex = 3;
+            // 
+            // colunlocked
+            // 
+            this.colunlocked.FieldName = "unlocked";
+            this.colunlocked.Name = "colunlocked";
+            this.colunlocked.Visible = true;
+            this.colunlocked.VisibleIndex = 4;
+            // 
+            // colnearSubject
+            // 
+            this.colnearSubject.FieldName = "nearSubject";
+            this.colnearSubject.Name = "colnearSubject";
+            this.colnearSubject.Visible = true;
+            this.colnearSubject.VisibleIndex = 5;
             // 
             // gridControl
             // 
+            this.gridControl.DataMember = "catalog";
+            this.gridControl.DataSource = this.fullDataBindingSource;
             this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode1.LevelTemplate = this.cardView1;
-            gridLevelNode1.RelationName = "stage_subject";
+            gridLevelNode3.LevelTemplate = this.gridView2;
+            gridLevelNode4.LevelTemplate = this.cardView1;
+            gridLevelNode4.RelationName = "stage_subject";
+            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode4});
+            gridLevelNode3.RelationName = "catalog_stage";
             this.gridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode3});
             this.gridControl.Location = new System.Drawing.Point(0, 0);
             this.gridControl.MainView = this.gridView1;
             this.gridControl.Name = "gridControl";
+            this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemComboBox1,
+            this.repositoryItemLookUpEdit1});
             this.gridControl.Size = new System.Drawing.Size(918, 510);
             this.gridControl.TabIndex = 0;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
-            this.cardView1});
+            this.cardView1,
+            this.gridView2});
             // 
             // gridView1
             // 
             this.gridView1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colid,
+            this.colname});
             this.gridView1.GridControl = this.gridControl;
             this.gridView1.Name = "gridView1";
+            // 
+            // colid
+            // 
+            this.colid.FieldName = "id";
+            this.colid.Name = "colid";
+            this.colid.OptionsColumn.AllowEdit = false;
+            this.colid.Visible = true;
+            this.colid.VisibleIndex = 0;
+            // 
+            // colname
+            // 
+            this.colname.FieldName = "name";
+            this.colname.Name = "colname";
+            this.colname.Visible = true;
+            this.colname.VisibleIndex = 1;
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            // 
+            // cardView1
+            // 
+            this.cardView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colid2,
+            this.coltitle,
+            this.colsubjectType,
+            this.colcomicsType,
+            this.colstage,
+            this.collevel,
+            this.colremark,
+            this.colresImg,
+            this.colresText,
+            this.colresAudio,
+            this.colcreatdate,
+            this.coltip,
+            this.colselectors,
+            this.colanswer,
+            this.colsorter,
+            this.colresolved});
+            this.cardView1.FocusedCardTopFieldIndex = 0;
+            this.cardView1.GridControl = this.gridControl;
+            this.cardView1.Name = "cardView1";
+            // 
+            // colid2
+            // 
+            this.colid2.FieldName = "id";
+            this.colid2.Name = "colid2";
+            this.colid2.OptionsColumn.AllowEdit = false;
+            this.colid2.Visible = true;
+            this.colid2.VisibleIndex = 0;
+            // 
+            // coltitle
+            // 
+            this.coltitle.FieldName = "title";
+            this.coltitle.Name = "coltitle";
+            this.coltitle.Visible = true;
+            this.coltitle.VisibleIndex = 1;
+            // 
+            // colsubjectType
+            // 
+            this.colsubjectType.FieldName = "subjectType";
+            this.colsubjectType.Name = "colsubjectType";
+            this.colsubjectType.Visible = true;
+            this.colsubjectType.VisibleIndex = 2;
+            // 
+            // colcomicsType
+            // 
+            this.colcomicsType.FieldName = "comicsType";
+            this.colcomicsType.Name = "colcomicsType";
+            this.colcomicsType.Visible = true;
+            this.colcomicsType.VisibleIndex = 3;
+            // 
+            // colstage
+            // 
+            this.colstage.FieldName = "stage";
+            this.colstage.Name = "colstage";
+            this.colstage.Visible = true;
+            this.colstage.VisibleIndex = 4;
+            // 
+            // collevel
+            // 
+            this.collevel.FieldName = "level";
+            this.collevel.Name = "collevel";
+            this.collevel.Visible = true;
+            this.collevel.VisibleIndex = 5;
+            // 
+            // colremark
+            // 
+            this.colremark.FieldName = "remark";
+            this.colremark.Name = "colremark";
+            this.colremark.Visible = true;
+            this.colremark.VisibleIndex = 6;
+            // 
+            // colresImg
+            // 
+            this.colresImg.FieldName = "resImg";
+            this.colresImg.Name = "colresImg";
+            this.colresImg.Visible = true;
+            this.colresImg.VisibleIndex = 7;
+            // 
+            // colresText
+            // 
+            this.colresText.FieldName = "resText";
+            this.colresText.Name = "colresText";
+            this.colresText.Visible = true;
+            this.colresText.VisibleIndex = 8;
+            // 
+            // colresAudio
+            // 
+            this.colresAudio.FieldName = "resAudio";
+            this.colresAudio.Name = "colresAudio";
+            this.colresAudio.Visible = true;
+            this.colresAudio.VisibleIndex = 9;
+            // 
+            // colcreatdate
+            // 
+            this.colcreatdate.FieldName = "creatdate";
+            this.colcreatdate.Name = "colcreatdate";
+            this.colcreatdate.Visible = true;
+            this.colcreatdate.VisibleIndex = 10;
+            // 
+            // coltip
+            // 
+            this.coltip.FieldName = "tip";
+            this.coltip.Name = "coltip";
+            this.coltip.Visible = true;
+            this.coltip.VisibleIndex = 11;
+            // 
+            // colselectors
+            // 
+            this.colselectors.FieldName = "selectors";
+            this.colselectors.Name = "colselectors";
+            this.colselectors.Visible = true;
+            this.colselectors.VisibleIndex = 12;
+            // 
+            // colanswer
+            // 
+            this.colanswer.FieldName = "answer";
+            this.colanswer.Name = "colanswer";
+            this.colanswer.Visible = true;
+            this.colanswer.VisibleIndex = 13;
+            // 
+            // colsorter
+            // 
+            this.colsorter.FieldName = "sorter";
+            this.colsorter.Name = "colsorter";
+            this.colsorter.Visible = true;
+            this.colsorter.VisibleIndex = 14;
+            // 
+            // colresolved
+            // 
+            this.colresolved.FieldName = "resolved";
+            this.colresolved.Name = "colresolved";
+            this.colresolved.Visible = true;
+            this.colresolved.VisibleIndex = 15;
             // 
             // splitContainerControl
             // 
@@ -354,6 +641,7 @@
             this.iSave.ImageIndex = 4;
             this.iSave.LargeImageIndex = 4;
             this.iSave.Name = "iSave";
+            this.iSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iSave_ItemClick);
             // 
             // iSaveAs
             // 
@@ -636,12 +924,6 @@
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1100, 31);
             // 
-            // cardView1
-            // 
-            this.cardView1.FocusedCardTopFieldIndex = 0;
-            this.cardView1.GridControl = this.gridControl;
-            this.cardView1.Name = "cardView1";
-            // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -658,8 +940,15 @@
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.catalogBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).EndInit();
@@ -673,8 +962,6 @@
             this.popupControlContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cardView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -732,8 +1019,37 @@
         private System.Windows.Forms.ImageList navbarImageListLarge;
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private System.Windows.Forms.BindingSource bindingSource1;
         private DevExpress.XtraGrid.Views.Card.CardView cardView1;
+        private DevExpress.XtraGrid.Columns.GridColumn colid;
+        private DevExpress.XtraGrid.Columns.GridColumn colname;
+        private DevExpress.XtraGrid.Columns.GridColumn colid2;
+        private DevExpress.XtraGrid.Columns.GridColumn coltitle;
+        private DevExpress.XtraGrid.Columns.GridColumn colsubjectType;
+        private DevExpress.XtraGrid.Columns.GridColumn colcomicsType;
+        private DevExpress.XtraGrid.Columns.GridColumn colstage;
+        private DevExpress.XtraGrid.Columns.GridColumn collevel;
+        private DevExpress.XtraGrid.Columns.GridColumn colremark;
+        private DevExpress.XtraGrid.Columns.GridColumn colresImg;
+        private DevExpress.XtraGrid.Columns.GridColumn colresText;
+        private DevExpress.XtraGrid.Columns.GridColumn colresAudio;
+        private DevExpress.XtraGrid.Columns.GridColumn colcreatdate;
+        private DevExpress.XtraGrid.Columns.GridColumn coltip;
+        private DevExpress.XtraGrid.Columns.GridColumn colselectors;
+        private DevExpress.XtraGrid.Columns.GridColumn colanswer;
+        private DevExpress.XtraGrid.Columns.GridColumn colsorter;
+        private DevExpress.XtraGrid.Columns.GridColumn colresolved;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn colid1;
+        private DevExpress.XtraGrid.Columns.GridColumn colname1;
+        private DevExpress.XtraGrid.Columns.GridColumn colcatalog;
+        private DevExpress.XtraGrid.Columns.GridColumn colstageType;
+        private DevExpress.XtraGrid.Columns.GridColumn colunlocked;
+        private DevExpress.XtraGrid.Columns.GridColumn colnearSubject;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private System.Windows.Forms.BindingSource fullDataBindingSource;
+        private fullDataSet fullDataSet;
+        private System.Windows.Forms.BindingSource catalogBindingSource;
 
     }
 }
