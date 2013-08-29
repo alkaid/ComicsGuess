@@ -33,17 +33,18 @@
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.stageTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataSet = new Editor.fullDataSet();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colid1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colname1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colcatalog = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.catalogBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fullDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fullDataSet = new Editor.fullDataSet();
             this.colstageType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.stageTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.lkupEditStageType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colunlocked = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colnearSubject = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
@@ -51,6 +52,13 @@
             this.colid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.lkupEditSubjectType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.subjectTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lkupEditComicsType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.comicsTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.glkupEditStage = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.stageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.repositoryItemGridLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cardView1 = new DevExpress.XtraGrid.Views.Card.CardView();
             this.colid2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltitle = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -80,6 +88,7 @@
             this.tasksItem = new DevExpress.XtraNavBar.NavBarItem();
             this.navbarImageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.navbarImageList = new System.Windows.Forms.ImageList(this.components);
+            this.panelMain = new DevExpress.XtraEditors.PanelControl();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.popupControlContainer2 = new DevExpress.XtraBars.PopupControlContainer(this.components);
@@ -108,6 +117,8 @@
             this.iCenterTextAlign = new DevExpress.XtraBars.BarButtonItem();
             this.iRightTextAlign = new DevExpress.XtraBars.BarButtonItem();
             this.rgbiSkins = new DevExpress.XtraBars.RibbonGalleryBarItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -117,34 +128,35 @@
             this.helpRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.stageTypeTableAdapter = new Editor.fullDataSetTableAdapters.stageTypeTableAdapter();
-            this.lkupEditStageType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.lkupEditSubjectType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.subjectTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.subjectTypeTableAdapter = new Editor.fullDataSetTableAdapters.subjectTypeTableAdapter();
-            this.lkupEditComicsType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.comicsTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.comicsTypeTableAdapter = new Editor.fullDataSetTableAdapters.comicsTypeTableAdapter();
-            this.glkupEditStage = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
-            this.repositoryItemGridLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.stageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stageTableAdapter = new Editor.fullDataSetTableAdapters.stageTableAdapter();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            ((System.ComponentModel.ISupportInitialize)(repositoryItemGridLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stageTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(repositoryItemGridLookUpEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stageTypeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkupEditStageType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkupEditSubjectType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.subjectTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkupEditComicsType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comicsTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.glkupEditStage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stageBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit2View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelMain)).BeginInit();
+            this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer2)).BeginInit();
@@ -154,15 +166,41 @@
             this.popupControlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkupEditStageType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkupEditSubjectType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.subjectTypeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkupEditComicsType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comicsTypeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.glkupEditStage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit2View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stageBindingSource)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // repositoryItemGridLookUpEdit1
+            // 
+            repositoryItemGridLookUpEdit1.AutoHeight = false;
+            repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            repositoryItemGridLookUpEdit1.DataSource = this.stageTypeBindingSource;
+            repositoryItemGridLookUpEdit1.DisplayMember = "name";
+            repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
+            repositoryItemGridLookUpEdit1.ValueMember = "id";
+            repositoryItemGridLookUpEdit1.View = this.repositoryItemGridLookUpEdit1View;
+            // 
+            // stageTypeBindingSource
+            // 
+            this.stageTypeBindingSource.DataMember = "stageType";
+            this.stageTypeBindingSource.DataSource = this.fullDataBindingSource;
+            // 
+            // fullDataBindingSource
+            // 
+            this.fullDataBindingSource.DataSource = this.fullDataSet;
+            this.fullDataBindingSource.Position = 0;
+            // 
+            // fullDataSet
+            // 
+            this.fullDataSet.DataSetName = "fullDataSet";
+            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // gridView2
             // 
@@ -175,6 +213,8 @@
             this.colnearSubject});
             this.gridView2.GridControl = this.gridControl;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.MultiSelect = true;
+            this.gridView2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.stage_MouseUp);
             // 
             // colid1
             // 
@@ -214,16 +254,6 @@
             this.catalogBindingSource.DataMember = "catalog";
             this.catalogBindingSource.DataSource = this.fullDataBindingSource;
             // 
-            // fullDataBindingSource
-            // 
-            this.fullDataBindingSource.DataSource = this.fullDataSet;
-            this.fullDataBindingSource.Position = 0;
-            // 
-            // fullDataSet
-            // 
-            this.fullDataSet.DataSetName = "fullDataSet";
-            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // colstageType
             // 
             this.colstageType.ColumnEdit = this.lkupEditStageType;
@@ -232,28 +262,15 @@
             this.colstageType.Visible = true;
             this.colstageType.VisibleIndex = 3;
             // 
-            // repositoryItemGridLookUpEdit1
+            // lkupEditStageType
             // 
-            repositoryItemGridLookUpEdit1.AutoHeight = false;
-            repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lkupEditStageType.AutoHeight = false;
+            this.lkupEditStageType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            repositoryItemGridLookUpEdit1.DataSource = this.stageTypeBindingSource;
-            repositoryItemGridLookUpEdit1.DisplayMember = "name";
-            repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
-            repositoryItemGridLookUpEdit1.ValueMember = "id";
-            repositoryItemGridLookUpEdit1.View = this.repositoryItemGridLookUpEdit1View;
-            // 
-            // stageTypeBindingSource
-            // 
-            this.stageTypeBindingSource.DataMember = "stageType";
-            this.stageTypeBindingSource.DataSource = this.fullDataBindingSource;
-            // 
-            // repositoryItemGridLookUpEdit1View
-            // 
-            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
-            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            this.lkupEditStageType.DataSource = this.stageTypeBindingSource;
+            this.lkupEditStageType.DisplayMember = "name";
+            this.lkupEditStageType.Name = "lkupEditStageType";
+            this.lkupEditStageType.ValueMember = "id";
             // 
             // colunlocked
             // 
@@ -282,7 +299,7 @@
             gridLevelNode1.RelationName = "catalog_stage";
             this.gridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gridControl.Location = new System.Drawing.Point(0, 0);
+            this.gridControl.Location = new System.Drawing.Point(2, 2);
             this.gridControl.MainView = this.gridView1;
             this.gridControl.Name = "gridControl";
             this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -293,12 +310,13 @@
             this.lkupEditSubjectType,
             this.lkupEditComicsType,
             this.glkupEditStage});
-            this.gridControl.Size = new System.Drawing.Size(918, 510);
+            this.gridControl.Size = new System.Drawing.Size(914, 506);
             this.gridControl.TabIndex = 0;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
             this.cardView1,
             this.gridView2});
+            this.gridControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridView1_MouseUp);
             // 
             // gridView1
             // 
@@ -308,6 +326,8 @@
             this.colname});
             this.gridView1.GridControl = this.gridControl;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridView1_MouseUp);
             // 
             // colid
             // 
@@ -331,6 +351,59 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
+            // lkupEditSubjectType
+            // 
+            this.lkupEditSubjectType.AutoHeight = false;
+            this.lkupEditSubjectType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lkupEditSubjectType.DataSource = this.subjectTypeBindingSource;
+            this.lkupEditSubjectType.DisplayMember = "name";
+            this.lkupEditSubjectType.Name = "lkupEditSubjectType";
+            this.lkupEditSubjectType.ValueMember = "id";
+            // 
+            // subjectTypeBindingSource
+            // 
+            this.subjectTypeBindingSource.DataMember = "subjectType";
+            this.subjectTypeBindingSource.DataSource = this.fullDataBindingSource;
+            // 
+            // lkupEditComicsType
+            // 
+            this.lkupEditComicsType.AutoHeight = false;
+            this.lkupEditComicsType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lkupEditComicsType.DataSource = this.comicsTypeBindingSource;
+            this.lkupEditComicsType.DisplayMember = "name";
+            this.lkupEditComicsType.Name = "lkupEditComicsType";
+            this.lkupEditComicsType.ValueMember = "id";
+            // 
+            // comicsTypeBindingSource
+            // 
+            this.comicsTypeBindingSource.DataMember = "comicsType";
+            this.comicsTypeBindingSource.DataSource = this.fullDataBindingSource;
+            // 
+            // glkupEditStage
+            // 
+            this.glkupEditStage.AutoHeight = false;
+            this.glkupEditStage.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.glkupEditStage.DataSource = this.stageBindingSource;
+            this.glkupEditStage.DisplayMember = "name";
+            this.glkupEditStage.Name = "glkupEditStage";
+            this.glkupEditStage.ValueMember = "id";
+            this.glkupEditStage.View = this.repositoryItemGridLookUpEdit2View;
+            // 
+            // stageBindingSource
+            // 
+            this.stageBindingSource.DataMember = "stage";
+            this.stageBindingSource.DataSource = this.fullDataBindingSource;
+            // 
+            // repositoryItemGridLookUpEdit2View
+            // 
+            this.repositoryItemGridLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit2View.Name = "repositoryItemGridLookUpEdit2View";
+            this.repositoryItemGridLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit2View.OptionsView.ShowGroupPanel = false;
+            // 
             // cardView1
             // 
             this.cardView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -353,6 +426,8 @@
             this.cardView1.FocusedCardTopFieldIndex = 0;
             this.cardView1.GridControl = this.gridControl;
             this.cardView1.Name = "cardView1";
+            this.cardView1.OptionsSelection.MultiSelect = true;
+            this.cardView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.subject_MouseUp);
             // 
             // colid2
             // 
@@ -478,7 +553,7 @@
             this.splitContainerControl.Padding = new System.Windows.Forms.Padding(6);
             this.splitContainerControl.Panel1.Controls.Add(this.navBarControl);
             this.splitContainerControl.Panel1.Text = "Panel1";
-            this.splitContainerControl.Panel2.Controls.Add(this.gridControl);
+            this.splitContainerControl.Panel2.Controls.Add(this.panelMain);
             this.splitContainerControl.Panel2.Text = "Panel2";
             this.splitContainerControl.Size = new System.Drawing.Size(1100, 522);
             this.splitContainerControl.SplitterPosition = 165;
@@ -524,7 +599,7 @@
             // 
             // inboxItem
             // 
-            this.inboxItem.Caption = "Inbox";
+            this.inboxItem.Caption = "Main";
             this.inboxItem.Name = "inboxItem";
             this.inboxItem.SmallImageIndex = 0;
             // 
@@ -586,6 +661,15 @@
             this.navbarImageList.Images.SetKeyName(4, "Calendar_16x16.png");
             this.navbarImageList.Images.SetKeyName(5, "Tasks_16x16.png");
             // 
+            // panelMain
+            // 
+            this.panelMain.Controls.Add(this.gridControl);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(918, 510);
+            this.panelMain.TabIndex = 1;
+            // 
             // ribbonControl
             // 
             this.ribbonControl.ApplicationButtonDropDownControl = this.appMenu;
@@ -614,10 +698,12 @@
             this.iLeftTextAlign,
             this.iCenterTextAlign,
             this.iRightTextAlign,
-            this.rgbiSkins});
+            this.rgbiSkins,
+            this.barStaticItem1,
+            this.barStaticItem2});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 62;
+            this.ribbonControl.MaxItemId = 64;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -686,9 +772,11 @@
             this.iOpen.Hint = "Opens a file";
             this.iOpen.Id = 2;
             this.iOpen.ImageIndex = 1;
+            this.iOpen.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O));
             this.iOpen.LargeImageIndex = 1;
             this.iOpen.Name = "iOpen";
             this.iOpen.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.iOpen.ShortcutKeyDisplayString = "ctrl+o";
             this.iOpen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iOpen_ItemClick);
             // 
             // iSave
@@ -698,8 +786,10 @@
             this.iSave.Hint = "Saves the active document";
             this.iSave.Id = 16;
             this.iSave.ImageIndex = 4;
+            this.iSave.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S));
             this.iSave.LargeImageIndex = 4;
             this.iSave.Name = "iSave";
+            this.iSave.ShortcutKeyDisplayString = "ctrl+s";
             this.iSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iSave_ItemClick);
             // 
             // iSaveAs
@@ -714,13 +804,16 @@
             // 
             // iExit
             // 
-            this.iExit.Caption = "Exit";
+            this.iExit.Caption = "刷新";
             this.iExit.Description = "Closes this program after prompting you to save unsaved data.";
             this.iExit.Hint = "Closes this program after prompting you to save unsaved data";
             this.iExit.Id = 20;
             this.iExit.ImageIndex = 6;
+            this.iExit.ItemShortcut = new DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F5);
             this.iExit.LargeImageIndex = 6;
             this.iExit.Name = "iExit";
+            this.iExit.ShortcutKeyDisplayString = "F5";
+            this.iExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iExit_ItemClick);
             // 
             // popupControlContainer1
             // 
@@ -905,6 +998,20 @@
             this.rgbiSkins.Id = 60;
             this.rgbiSkins.Name = "rgbiSkins";
             // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "添加";
+            this.barStaticItem1.Id = 62;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "删除";
+            this.barStaticItem2.Id = 63;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // ribbonImageCollectionLarge
             // 
             this.ribbonImageCollectionLarge.ImageSize = new System.Drawing.Size(32, 32);
@@ -983,84 +1090,26 @@
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1100, 31);
             // 
-            // stageTypeTableAdapter
+            // contextMenuStrip1
             // 
-            this.stageTypeTableAdapter.ClearBeforeFill = true;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
+            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
-            // lkupEditStageType
+            // toolStripMenuItem1
             // 
-            this.lkupEditStageType.AutoHeight = false;
-            this.lkupEditStageType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lkupEditStageType.DataSource = this.stageTypeBindingSource;
-            this.lkupEditStageType.DisplayMember = "name";
-            this.lkupEditStageType.Name = "lkupEditStageType";
-            this.lkupEditStageType.ValueMember = "id";
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem1.Text = "添加";
             // 
-            // lkupEditSubjectType
+            // toolStripMenuItem2
             // 
-            this.lkupEditSubjectType.AutoHeight = false;
-            this.lkupEditSubjectType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lkupEditSubjectType.DataSource = this.subjectTypeBindingSource;
-            this.lkupEditSubjectType.DisplayMember = "name";
-            this.lkupEditSubjectType.Name = "lkupEditSubjectType";
-            this.lkupEditSubjectType.ValueMember = "id";
-            // 
-            // subjectTypeBindingSource
-            // 
-            this.subjectTypeBindingSource.DataMember = "subjectType";
-            this.subjectTypeBindingSource.DataSource = this.fullDataBindingSource;
-            // 
-            // subjectTypeTableAdapter
-            // 
-            this.subjectTypeTableAdapter.ClearBeforeFill = true;
-            // 
-            // lkupEditComicsType
-            // 
-            this.lkupEditComicsType.AutoHeight = false;
-            this.lkupEditComicsType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lkupEditComicsType.DataSource = this.comicsTypeBindingSource;
-            this.lkupEditComicsType.DisplayMember = "name";
-            this.lkupEditComicsType.Name = "lkupEditComicsType";
-            this.lkupEditComicsType.ValueMember = "id";
-            // 
-            // comicsTypeBindingSource
-            // 
-            this.comicsTypeBindingSource.DataMember = "comicsType";
-            this.comicsTypeBindingSource.DataSource = this.fullDataBindingSource;
-            // 
-            // comicsTypeTableAdapter
-            // 
-            this.comicsTypeTableAdapter.ClearBeforeFill = true;
-            // 
-            // glkupEditStage
-            // 
-            this.glkupEditStage.AutoHeight = false;
-            this.glkupEditStage.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.glkupEditStage.DataSource = this.stageBindingSource;
-            this.glkupEditStage.DisplayMember = "name";
-            this.glkupEditStage.Name = "glkupEditStage";
-            this.glkupEditStage.ValueMember = "id";
-            this.glkupEditStage.View = this.repositoryItemGridLookUpEdit2View;
-            // 
-            // repositoryItemGridLookUpEdit2View
-            // 
-            this.repositoryItemGridLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemGridLookUpEdit2View.Name = "repositoryItemGridLookUpEdit2View";
-            this.repositoryItemGridLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemGridLookUpEdit2View.OptionsView.ShowGroupPanel = false;
-            // 
-            // stageBindingSource
-            // 
-            this.stageBindingSource.DataMember = "stage";
-            this.stageBindingSource.DataSource = this.fullDataBindingSource;
-            // 
-            // stageTableAdapter
-            // 
-            this.stageTableAdapter.ClearBeforeFill = true;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem2.Text = "删除";
             // 
             // MainForm
             // 
@@ -1078,21 +1127,31 @@
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(repositoryItemGridLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stageTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(repositoryItemGridLookUpEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stageTypeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkupEditStageType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkupEditSubjectType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.subjectTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkupEditComicsType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comicsTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.glkupEditStage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stageBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit2View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelMain)).EndInit();
+            this.panelMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer2)).EndInit();
@@ -1103,14 +1162,7 @@
             this.popupControlContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkupEditStageType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkupEditSubjectType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.subjectTypeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkupEditComicsType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comicsTypeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.glkupEditStage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit2View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stageBindingSource)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1168,9 +1220,31 @@
         private System.Windows.Forms.ImageList navbarImageListLarge;
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Views.Card.CardView cardView1;
         private DevExpress.XtraGrid.Columns.GridColumn colid;
         private DevExpress.XtraGrid.Columns.GridColumn colname;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn colid1;
+        private DevExpress.XtraGrid.Columns.GridColumn colname1;
+        private DevExpress.XtraGrid.Columns.GridColumn colcatalog;
+        private DevExpress.XtraGrid.Columns.GridColumn colstageType;
+        private DevExpress.XtraGrid.Columns.GridColumn colunlocked;
+        private DevExpress.XtraGrid.Columns.GridColumn colnearSubject;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private System.Windows.Forms.BindingSource fullDataBindingSource;
+        private fullDataSet fullDataSet;
+        private System.Windows.Forms.BindingSource catalogBindingSource;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
+        private System.Windows.Forms.BindingSource stageTypeBindingSource;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkupEditStageType;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkupEditSubjectType;
+        private System.Windows.Forms.BindingSource subjectTypeBindingSource;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkupEditComicsType;
+        private System.Windows.Forms.BindingSource comicsTypeBindingSource;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit glkupEditStage;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit2View;
+        private System.Windows.Forms.BindingSource stageBindingSource;
+        private DevExpress.XtraGrid.Views.Card.CardView cardView1;
         private DevExpress.XtraGrid.Columns.GridColumn colid2;
         private DevExpress.XtraGrid.Columns.GridColumn coltitle;
         private DevExpress.XtraGrid.Columns.GridColumn colsubjectType;
@@ -1187,32 +1261,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn colanswer;
         private DevExpress.XtraGrid.Columns.GridColumn colsorter;
         private DevExpress.XtraGrid.Columns.GridColumn colresolved;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn colid1;
-        private DevExpress.XtraGrid.Columns.GridColumn colname1;
-        private DevExpress.XtraGrid.Columns.GridColumn colcatalog;
-        private DevExpress.XtraGrid.Columns.GridColumn colstageType;
-        private DevExpress.XtraGrid.Columns.GridColumn colunlocked;
-        private DevExpress.XtraGrid.Columns.GridColumn colnearSubject;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
-        private System.Windows.Forms.BindingSource fullDataBindingSource;
-        private fullDataSet fullDataSet;
-        private System.Windows.Forms.BindingSource catalogBindingSource;
-        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
-        private System.Windows.Forms.BindingSource stageTypeBindingSource;
-        private fullDataSetTableAdapters.stageTypeTableAdapter stageTypeTableAdapter;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkupEditStageType;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkupEditSubjectType;
-        private System.Windows.Forms.BindingSource subjectTypeBindingSource;
-        private fullDataSetTableAdapters.subjectTypeTableAdapter subjectTypeTableAdapter;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkupEditComicsType;
-        private System.Windows.Forms.BindingSource comicsTypeBindingSource;
-        private fullDataSetTableAdapters.comicsTypeTableAdapter comicsTypeTableAdapter;
-        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit glkupEditStage;
-        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit2View;
-        private System.Windows.Forms.BindingSource stageBindingSource;
-        private fullDataSetTableAdapters.stageTableAdapter stageTableAdapter;
+        private DevExpress.XtraEditors.PanelControl panelMain;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
 
     }
 }
