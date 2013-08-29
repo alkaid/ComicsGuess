@@ -21,6 +21,7 @@ namespace Editor
     {
         private string dbPath = string.Empty;
         private AllData allData;
+        private DataSet ds;
         public MainForm()
         {
             InitializeComponent();
@@ -45,8 +46,7 @@ namespace Editor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
-
+            ds = (DataSet)fullDataBindingSource.DataSource;
         }
 
         private void iOpen_ItemClick(object sender, ItemClickEventArgs e)
@@ -57,14 +57,12 @@ namespace Editor
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 dbPath = ofd.FileName;
-                DbHelperSQLite.DbPath = dbPath;
+                allData = new AllData(dbPath, ds);
             }
             //AllData allData = new AllData(AllData.FLAG_TABLE_catalog | AllData.FLAG_TABLE_stage | AllData.FLAG_TABLE_subject);
             //bindingSource1.DataSource = allData.dataSet;
             //gridControl.DataSource = bindingSource1;
             //gridControl.DataMember = "stage";
-            DataSet ds = (DataSet)fullDataBindingSource.DataSource;
-            allData = new AllData(ds);
             //AllData.fill(ds, AllData.FLAG_TABLE_catalog | AllData.FLAG_TABLE_stage | AllData.FLAG_TABLE_subject);
         }
 

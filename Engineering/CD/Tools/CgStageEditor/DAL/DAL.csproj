@@ -183,6 +183,13 @@
     <Compile Include="model\stageType.cs" />
     <Compile Include="model\subject.cs" />
     <Compile Include="model\subjectType.cs" />
+    <Compile Include="model\CatalogBuilder.cs" />
+    <Compile Include="model\SqliteBuilder.cs" />
+    <Compile Include="model\ComicsTypeBuilder.cs" />
+    <Compile Include="model\StageBuilder.cs" />
+    <Compile Include="model\StageTypeBuilder.cs" />
+    <Compile Include="model\SubjectBuilder.cs" />
+    <Compile Include="model\SubjectTypeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
