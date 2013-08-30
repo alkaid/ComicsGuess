@@ -17,6 +17,8 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid;
+using System.Collections;
+using DevExpress.XtraEditors.Repository;
 
 
 namespace Editor
@@ -30,6 +32,8 @@ namespace Editor
         private string dbPath = string.Empty;
         private AllData allData;
         private DataSet ds;
+        private Hashtable Images = new Hashtable();
+        string ImageDir = @"\Export\imgs\";
 
         //private enum CurrentMouseRightClickIn { none,catalog,stage,subject}
         //private CurrentMouseRightClickIn currentMouseRightClickIn = CurrentMouseRightClickIn.none;
@@ -146,6 +150,63 @@ namespace Editor
         {
             ds.Clear();
             allData = new AllData(dbPath, ds);
+        }
+
+        private void layoutView1_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
+        {
+            if (e.Column.FieldName == "imgDisplay" && e.IsGetData)
+            {
+                GridView view = sender as GridView;
+                string fileName = null;
+                object dbFileName = ((DataRowView)e.Row)["resImg"];
+                if (dbFileName is System.DBNull)
+                    return;
+                fileName = (string)((DataRowView)e.Row)["resImg"];
+                if (!Images.ContainsKey(fileName))
+                {
+                    Image img = null;
+                    try
+                    {
+                        //string filePath = DevExpress.Utils.FilesHelper.FindingFileName(Application.StartupPath, ImageDir + fileName, false);
+                        img = Image.FromFile(Application.StartupPath+ ImageDir + fileName);
+                    }
+                    catch
+                    {
+                        
+                    }
+                    Images.Add(fileName, img);
+                }
+                e.Value = Images[fileName];
+            }
+        }
+
+        private void layoutView1_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "imgDisplay")
+            {
+                GridView view = sender as GridView;
+                string fileName = null;
+                if (null == e.Value)
+                    return;
+                Image img = (Image)e.Value;
+                int stageId = (int)(view.GetRowCellValue(e.RowHandle,view.Columns["stage"]));
+                coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
+                int catalogId = s.catalog;
+            }
+        }
+
+        private void layoutView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Layout.Events.LayoutViewCustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName == "imgDisplay")
+            {
+                RepositoryItemPictureEdit picEdit = (RepositoryItemPictureEdit)e.RepositoryItem;
+                picEdit.LoadCompleted += new EventHandler(picEdit_LoadCompleted);
+            }
+        }
+
+        void picEdit_LoadCompleted(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         
