@@ -98,6 +98,7 @@
             this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
             this.item1 = new DevExpress.XtraLayout.SimpleSeparator();
             this.item2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::Editor.WaitForm1), true, true);
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.navBarControl = new DevExpress.XtraNavBar.NavBarControl();
             this.mailGroup = new DevExpress.XtraNavBar.NavBarGroup();
@@ -124,8 +125,8 @@
             this.someLabelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.someLabelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.ribbonImageCollection = new DevExpress.Utils.ImageCollection(this.components);
-            this.iClose = new DevExpress.XtraBars.BarButtonItem();
-            this.iFind = new DevExpress.XtraBars.BarButtonItem();
+            this.iImport = new DevExpress.XtraBars.BarButtonItem();
+            this.iExport = new DevExpress.XtraBars.BarButtonItem();
             this.iHelp = new DevExpress.XtraBars.BarButtonItem();
             this.iAbout = new DevExpress.XtraBars.BarButtonItem();
             this.siStatus = new DevExpress.XtraBars.BarStaticItem();
@@ -935,8 +936,8 @@
             this.ribbonControl.ExpandCollapseItem,
             this.iNew,
             this.iOpen,
-            this.iClose,
-            this.iFind,
+            this.iImport,
+            this.iExport,
             this.iSave,
             this.iSaveAs,
             this.iExit,
@@ -957,7 +958,7 @@
             this.barStaticItem2});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 64;
+            this.ribbonControl.MaxItemId = 67;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -1021,7 +1022,7 @@
             // 
             // iOpen
             // 
-            this.iOpen.Caption = "&Open";
+            this.iOpen.Caption = "导入DB";
             this.iOpen.Description = "Opens a file.";
             this.iOpen.Hint = "Opens a file";
             this.iOpen.Id = 2;
@@ -1118,27 +1119,28 @@
             this.ribbonImageCollection.Images.SetKeyName(13, "Ribbon_AlignCenter_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(14, "Ribbon_AlignRight_16x16.png");
             // 
-            // iClose
+            // iImport
             // 
-            this.iClose.Caption = "&Close";
-            this.iClose.Description = "Closes the active document.";
-            this.iClose.Hint = "Closes the active document";
-            this.iClose.Id = 3;
-            this.iClose.ImageIndex = 2;
-            this.iClose.LargeImageIndex = 2;
-            this.iClose.Name = "iClose";
-            this.iClose.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.iImport.Caption = "导入资源";
+            this.iImport.Description = "Closes the active document.";
+            this.iImport.Hint = "Closes the active document";
+            this.iImport.Id = 3;
+            this.iImport.ImageIndex = 1;
+            this.iImport.LargeImageIndex = 2;
+            this.iImport.Name = "iImport";
+            this.iImport.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.iImport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iImport_ItemClick);
             // 
-            // iFind
+            // iExport
             // 
-            this.iFind.Caption = "Find";
-            this.iFind.Description = "Searches for the specified info.";
-            this.iFind.Hint = "Searches for the specified info";
-            this.iFind.Id = 15;
-            this.iFind.ImageIndex = 3;
-            this.iFind.LargeImageIndex = 3;
-            this.iFind.Name = "iFind";
-            this.iFind.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.iExport.Caption = "导出";
+            this.iExport.Description = "Searches for the specified info.";
+            this.iExport.Hint = "Searches for the specified info";
+            this.iExport.Id = 15;
+            this.iExport.ImageIndex = 2;
+            this.iExport.LargeImageIndex = 3;
+            this.iExport.Name = "iExport";
+            this.iExport.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)((DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             // 
             // iHelp
             // 
@@ -1294,8 +1296,8 @@
             // 
             this.fileRibbonPageGroup.ItemLinks.Add(this.iNew);
             this.fileRibbonPageGroup.ItemLinks.Add(this.iOpen);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iClose);
-            this.fileRibbonPageGroup.ItemLinks.Add(this.iFind);
+            this.fileRibbonPageGroup.ItemLinks.Add(this.iImport);
+            this.fileRibbonPageGroup.ItemLinks.Add(this.iExport);
             this.fileRibbonPageGroup.ItemLinks.Add(this.iSave);
             this.fileRibbonPageGroup.ItemLinks.Add(this.iSaveAs);
             this.fileRibbonPageGroup.Name = "fileRibbonPageGroup";
@@ -1449,8 +1451,8 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl;
         private DevExpress.XtraBars.BarButtonItem iNew;
         private DevExpress.XtraBars.BarButtonItem iOpen;
-        private DevExpress.XtraBars.BarButtonItem iClose;
-        private DevExpress.XtraBars.BarButtonItem iFind;
+        private DevExpress.XtraBars.BarButtonItem iImport;
+        private DevExpress.XtraBars.BarButtonItem iExport;
         private DevExpress.XtraBars.BarButtonItem iSave;
         private DevExpress.XtraBars.BarButtonItem iSaveAs;
         private DevExpress.XtraBars.BarButtonItem iExit;
@@ -1565,6 +1567,7 @@
         private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
         private DevExpress.XtraLayout.SimpleSeparator item1;
         private DevExpress.XtraLayout.EmptySpaceItem item2;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
 
     }
 }
