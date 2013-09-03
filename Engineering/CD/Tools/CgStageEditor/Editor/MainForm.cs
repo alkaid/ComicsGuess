@@ -36,9 +36,9 @@ namespace Editor
         private Hashtable Images = new Hashtable();
         string exportDir = @"\Export\";
         string backupDir = @"\Backup\";
-        string imgDir = @"imgs\";
-        string audioDir = @"audios\";
-        string videoDir = @"videos\";
+        string imgDir = @"imgs/";
+        string audioDir = @"audios/";
+        string videoDir = @"videos/";
 
         //private enum CurrentMouseRightClickIn { none,catalog,stage,subject}
         //private CurrentMouseRightClickIn currentMouseRightClickIn = CurrentMouseRightClickIn.none;
@@ -163,12 +163,17 @@ namespace Editor
 
         private void iSave_ItemClick(object sender, ItemClickEventArgs e)
         {
+            save();
+        }
+
+        private void save()
+        {
             DevExpress.XtraGrid.Views.Base.BaseView view = gridControl.FocusedView;
             if (!(view.PostEditor() && view.UpdateCurrentRow()))
             {
                 return;
             }
-            if (ds == null || ds.Tables.Count == 0 || ds.Tables["catalog"].Rows.Count==0)
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables["catalog"].Rows.Count == 0)
                 return;
             MessageBox.Show("保存成功");
             allData.update();
@@ -264,17 +269,94 @@ namespace Editor
 
         private void layoutView1_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            if (e.Column.FieldName == "imgDisplay")
+            //if (e.Column.FieldName == "imgDisplay")
+            //{
+            //    GridView view = sender as GridView;
+            //    string fileName = null;
+            //    //if (null == e.Value)
+            //    //    return;
+            //    Image img = (Image)e.Value;
+            //    //获得stageId、catalogId、subjectId
+            //    int subjectId = (int)(view.GetRowCellValue(e.RowHandle, view.Columns["id"]));
+            //    int stageId = (int)(view.GetRowCellValue(e.RowHandle,view.Columns["stage"]));
+            //    coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
+            //    int catalogId = s.catalog;
+            //    //获得原resImg字段
+            //    object objResImg = view.GetRowCellValue(e.RowHandle, view.Columns["resImg"]);
+            //    string resImg = "";
+            //    if (null == objResImg || objResImg is System.DBNull) { }
+            //    else
+            //    {
+            //        resImg = objResImg.ToString();
+            //    }
+            //    //删除原图
+            //    if (resImg != "")
+            //    {
+            //        File.Delete(exportDir + resImg);
+            //    }
+            //    //生成图片名称 保存新图
+            //    string imgName = generateFileName(catalogId, stageId, subjectId, "img");
+            //    resImg = imgDir + catalogId + "\\" + imgName;
+            //    string imgPath = exportDir + resImg;
+            //    save();
+            //}
+        }
+
+        private void repositoryItemMyPictureEdit1_ImageLoaded(object sender, MyPictureEdit.ImageLoadedEventArgs e)
+        {
+            MyPictureEdit.RepositoryItemMyPictureEdit repoPicEdit = (MyPictureEdit.RepositoryItemMyPictureEdit)sender;
+            //repositoryItemMyPictureEdit1.FileName = e.FileName;
+            ColumnView currentView = gridControl.FocusedView as ColumnView;
+            int r=currentView.FocusedRowHandle;
+            //获得stageId、catalogId、subjectId
+            int subjectId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["id"]));
+            int stageId = Convert.ToInt32(currentView.GetRowCellValue(r,currentView.Columns["stage"]));
+            coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
+            int catalogId = s.catalog;
+            //获得原resImg字段
+            object objResImg = currentView.GetRowCellValue(r, currentView.Columns["resImg"]);
+            string resImg = "";
+            if (null == objResImg || objResImg is System.DBNull) { }
+            else
             {
-                GridView view = sender as GridView;
-                string fileName = null;
-                if (null == e.Value)
-                    return;
-                Image img = (Image)e.Value;
-                int stageId = (int)(view.GetRowCellValue(e.RowHandle,view.Columns["stage"]));
-                coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
-                int catalogId = s.catalog;
+                resImg = objResImg.ToString();
             }
+            
+            string oldResImg = resImg;
+            
+            //生成图片名称 保存新图
+            string ext = e.FileName.Substring(e.FileName.LastIndexOf(".")); //由原文件获得扩展名
+            string imgName = generateFileName(catalogId, stageId, subjectId, "img") + ext;
+            resImg = imgDir + catalogId + "/" + imgName;
+            string imgPath = exportDir + resImg;
+            File.Copy(e.FileName, imgPath, true);
+            
+            //更新resImg字段
+            currentView.SetRowCellValue(r, currentView.Columns["resImg"], resImg);//执行此句代码时，会触发layoutView1_CustomUnboundColumnData事件，就会自动更新imgDisplay列，所以屏蔽下面代码
+            //save();
+            
+            //更新Images 更新imgDisplay
+            /*Image img = null;
+            try
+            {
+                //string filePath = DevExpress.Utils.FilesHelper.FindingFileName(Application.StartupPath, ImageDir + fileName, false);
+                img = Image.FromFile(imgPath);
+                Images.Add(resImg, img);
+            }
+            catch
+            {
+                img = Resource1.Icon_Simple_Error;
+            }
+            currentView.SetRowCellValue(r, currentView.Columns["imgDisplay"], img);*/
+            //删除原图
+            if (oldResImg != "")
+            {
+                Image old = (Image)Images[oldResImg];
+                Images.Remove(oldResImg);
+                old.Dispose();
+                File.Delete(exportDir + oldResImg);
+            }
+            
         }
 
         private void layoutView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Layout.Events.LayoutViewCustomRowCellEditEventArgs e)
@@ -282,18 +364,8 @@ namespace Editor
             if (e.Column.FieldName == "imgDisplay")
             {
                 RepositoryItemPictureEdit picEdit = (RepositoryItemPictureEdit)e.RepositoryItem;
-                picEdit.LoadCompleted += new EventHandler(picEdit_LoadCompleted);
             }
         }
-
-        void picEdit_LoadCompleted(object sender, EventArgs e)
-        {
-            RepositoryItemPictureEdit picEdit = sender as RepositoryItemPictureEdit;
-            throw new NotImplementedException();
-        }
-
-
-
 
 
         /// <summary>
@@ -364,8 +436,40 @@ namespace Editor
                 Console.WriteLine(ex.Message.ToString());
             }
         }
-        
 
+        private string generateFileName(int catalogId, int stageId, int subjectId,string type)
+        {
+            return catalogId + "_" + stageId + "_" + subjectId + "_" + type +"_" + GetRnd(4, true, true, true, false, "");
+        }
+
+        ///<summary>
+        ///生成随机字符串
+        ///</summary>
+        ///<param name="length">目标字符串的长度</param>
+        ///<param name="useNum">是否包含数字，1=包含，默认为包含</param>
+        ///<param name="useLow">是否包含小写字母，1=包含，默认为包含</param>
+        ///<param name="useUpp">是否包含大写字母，1=包含，默认为包含</param>
+        ///<param name="useSpe">是否包含特殊字符，1=包含，默认为不包含</param>
+        ///<param name="custom">要包含的自定义字符，直接输入要包含的字符列表</param>
+        ///<returns>指定长度的随机字符串</returns>
+        private string GetRnd(int length, bool useNum, bool useLow, bool useUpp, bool useSpe, string custom)
+        {
+            byte[] b = new byte[4];
+            new System.Security.Cryptography.RNGCryptoServiceProvider().GetBytes(b);
+            Random r = new Random(BitConverter.ToInt32(b, 0));
+            string s = null, str = custom;
+            if (useNum == true) { str += "0123456789"; }
+            if (useLow == true) { str += "abcdefghijklmnopqrstuvwxyz"; }
+            if (useUpp == true) { str += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+            if (useSpe == true) { str += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; }
+            for (int i = 0; i < length; i++)
+            {
+                s += str.Substring(r.Next(0, str.Length - 1), 1);
+            }
+            return s;
+        }
+
+       
    
     }
 }
