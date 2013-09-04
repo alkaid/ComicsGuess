@@ -103,15 +103,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataSetMain.cs">
-      <DependentUpon>dataSetMain.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="dataSetMain.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dataSetMain.xsd</DependentUpon>
-    </Compile>
     <Compile Include="fullDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,17 +153,6 @@
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="dataSetMain.xsc">
-      <DependentUpon>dataSetMain.xsd</DependentUpon>
-    </None>
-    <None Include="dataSetMain.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dataSetMain.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="dataSetMain.xss">
-      <DependentUpon>dataSetMain.xsd</DependentUpon>
-    </None>
     <None Include="fullDataSet.xsc">
       <DependentUpon>fullDataSet.xsd</DependentUpon>
     </None>

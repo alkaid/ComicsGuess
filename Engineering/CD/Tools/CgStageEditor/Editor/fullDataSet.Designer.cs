@@ -38,13 +38,13 @@ namespace Editor {
         
         private global::System.Data.DataRelation relationFK_stage_0;
         
-        private global::System.Data.DataRelation relationFK_stage_1;
+        private global::System.Data.DataRelation relationstageType_stage;
         
         private global::System.Data.DataRelation relationcatalog_stage;
         
-        private global::System.Data.DataRelation relationFK_subject_1;
+        private global::System.Data.DataRelation relationcomicsType_subject;
         
-        private global::System.Data.DataRelation relationFK_subject_2;
+        private global::System.Data.DataRelation relationsubjectType_subject;
         
         private global::System.Data.DataRelation relationstage_subject;
         
@@ -327,10 +327,10 @@ namespace Editor {
                 }
             }
             this.relationFK_stage_0 = this.Relations["FK_stage_0"];
-            this.relationFK_stage_1 = this.Relations["FK_stage_1"];
+            this.relationstageType_stage = this.Relations["stageType_stage"];
             this.relationcatalog_stage = this.Relations["catalog_stage"];
-            this.relationFK_subject_1 = this.Relations["FK_subject_1"];
-            this.relationFK_subject_2 = this.Relations["FK_subject_2"];
+            this.relationcomicsType_subject = this.Relations["comicsType_subject"];
+            this.relationsubjectType_subject = this.Relations["subjectType_subject"];
             this.relationstage_subject = this.Relations["stage_subject"];
         }
         
@@ -358,22 +358,22 @@ namespace Editor {
                         this.tablesubject.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablestage.nearSubjectColumn}, false);
             this.Relations.Add(this.relationFK_stage_0);
-            this.relationFK_stage_1 = new global::System.Data.DataRelation("FK_stage_1", new global::System.Data.DataColumn[] {
+            this.relationstageType_stage = new global::System.Data.DataRelation("stageType_stage", new global::System.Data.DataColumn[] {
                         this.tablestageType.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablestage.stageTypeColumn}, false);
-            this.Relations.Add(this.relationFK_stage_1);
+            this.Relations.Add(this.relationstageType_stage);
             this.relationcatalog_stage = new global::System.Data.DataRelation("catalog_stage", new global::System.Data.DataColumn[] {
                         this.tablecatalog.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablestage.catalogColumn}, false);
             this.Relations.Add(this.relationcatalog_stage);
-            this.relationFK_subject_1 = new global::System.Data.DataRelation("FK_subject_1", new global::System.Data.DataColumn[] {
+            this.relationcomicsType_subject = new global::System.Data.DataRelation("comicsType_subject", new global::System.Data.DataColumn[] {
                         this.tablecomicsType.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablesubject.comicsTypeColumn}, false);
-            this.Relations.Add(this.relationFK_subject_1);
-            this.relationFK_subject_2 = new global::System.Data.DataRelation("FK_subject_2", new global::System.Data.DataColumn[] {
+            this.Relations.Add(this.relationcomicsType_subject);
+            this.relationsubjectType_subject = new global::System.Data.DataRelation("subjectType_subject", new global::System.Data.DataColumn[] {
                         this.tablesubjectType.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablesubject.subjectTypeColumn}, false);
-            this.Relations.Add(this.relationFK_subject_2);
+            this.Relations.Add(this.relationsubjectType_subject);
             this.relationstage_subject = new global::System.Data.DataRelation("stage_subject", new global::System.Data.DataColumn[] {
                         this.tablestage.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablesubject.stageColumn}, false);
@@ -1180,7 +1180,7 @@ namespace Editor {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public stageRow AddstageRow(string name, catalogRow parentcatalogRowBycatalog_stage, stageTypeRow parentstageTypeRowByFK_stage_1, bool unlocked, subjectRow parentsubjectRowByFK_stage_0) {
+            public stageRow AddstageRow(string name, catalogRow parentcatalogRowBycatalog_stage, stageTypeRow parentstageTypeRowBystageType_stage, bool unlocked, subjectRow parentsubjectRowByFK_stage_0) {
                 stageRow rowstageRow = ((stageRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1192,8 +1192,8 @@ namespace Editor {
                 if ((parentcatalogRowBycatalog_stage != null)) {
                     columnValuesArray[2] = parentcatalogRowBycatalog_stage[0];
                 }
-                if ((parentstageTypeRowByFK_stage_1 != null)) {
-                    columnValuesArray[3] = parentstageTypeRowByFK_stage_1[0];
+                if ((parentstageTypeRowBystageType_stage != null)) {
+                    columnValuesArray[3] = parentstageTypeRowBystageType_stage[0];
                 }
                 if ((parentsubjectRowByFK_stage_0 != null)) {
                     columnValuesArray[5] = parentsubjectRowByFK_stage_0[0];
@@ -1902,7 +1902,7 @@ namespace Editor {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public subjectRow AddsubjectRow(string title, subjectTypeRow parentsubjectTypeRowByFK_subject_2, comicsTypeRow parentcomicsTypeRowByFK_subject_1, stageRow parentstageRowBystage_subject, long level, string remark, string resImg, string resText, string resAudio, System.DateTime creatdate, string tip, string selectors, string answer, long sorter, bool resolved) {
+            public subjectRow AddsubjectRow(string title, subjectTypeRow parentsubjectTypeRowBysubjectType_subject, comicsTypeRow parentcomicsTypeRowBycomicsType_subject, stageRow parentstageRowBystage_subject, long level, string remark, string resImg, string resText, string resAudio, System.DateTime creatdate, string tip, string selectors, string answer, long sorter, bool resolved) {
                 subjectRow rowsubjectRow = ((subjectRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1921,11 +1921,11 @@ namespace Editor {
                         answer,
                         sorter,
                         resolved};
-                if ((parentsubjectTypeRowByFK_subject_2 != null)) {
-                    columnValuesArray[2] = parentsubjectTypeRowByFK_subject_2[0];
+                if ((parentsubjectTypeRowBysubjectType_subject != null)) {
+                    columnValuesArray[2] = parentsubjectTypeRowBysubjectType_subject[0];
                 }
-                if ((parentcomicsTypeRowByFK_subject_1 != null)) {
-                    columnValuesArray[3] = parentcomicsTypeRowByFK_subject_1[0];
+                if ((parentcomicsTypeRowBycomicsType_subject != null)) {
+                    columnValuesArray[3] = parentcomicsTypeRowBycomicsType_subject[0];
                 }
                 if ((parentstageRowBystage_subject != null)) {
                     columnValuesArray[4] = parentstageRowBystage_subject[0];
@@ -2522,11 +2522,11 @@ namespace Editor {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public subjectRow[] GetsubjectRows() {
-                if ((this.Table.ChildRelations["FK_subject_1"] == null)) {
+                if ((this.Table.ChildRelations["comicsType_subject"] == null)) {
                     return new subjectRow[0];
                 }
                 else {
-                    return ((subjectRow[])(base.GetChildRows(this.Table.ChildRelations["FK_subject_1"])));
+                    return ((subjectRow[])(base.GetChildRows(this.Table.ChildRelations["comicsType_subject"])));
                 }
             }
         }
@@ -2631,10 +2631,10 @@ namespace Editor {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public stageTypeRow stageTypeRow {
                 get {
-                    return ((stageTypeRow)(this.GetParentRow(this.Table.ParentRelations["FK_stage_1"])));
+                    return ((stageTypeRow)(this.GetParentRow(this.Table.ParentRelations["stageType_stage"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_stage_1"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["stageType_stage"]);
                 }
             }
             
@@ -2712,11 +2712,11 @@ namespace Editor {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public stageRow[] GetstageRows() {
-                if ((this.Table.ChildRelations["FK_stage_1"] == null)) {
+                if ((this.Table.ChildRelations["stageType_stage"] == null)) {
                     return new stageRow[0];
                 }
                 else {
-                    return ((stageRow[])(base.GetChildRows(this.Table.ChildRelations["FK_stage_1"])));
+                    return ((stageRow[])(base.GetChildRows(this.Table.ChildRelations["stageType_stage"])));
                 }
             }
         }
@@ -2965,10 +2965,10 @@ namespace Editor {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public comicsTypeRow comicsTypeRow {
                 get {
-                    return ((comicsTypeRow)(this.GetParentRow(this.Table.ParentRelations["FK_subject_1"])));
+                    return ((comicsTypeRow)(this.GetParentRow(this.Table.ParentRelations["comicsType_subject"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_subject_1"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["comicsType_subject"]);
                 }
             }
             
@@ -2976,10 +2976,10 @@ namespace Editor {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public subjectTypeRow subjectTypeRow {
                 get {
-                    return ((subjectTypeRow)(this.GetParentRow(this.Table.ParentRelations["FK_subject_2"])));
+                    return ((subjectTypeRow)(this.GetParentRow(this.Table.ParentRelations["subjectType_subject"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_subject_2"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["subjectType_subject"]);
                 }
             }
             
@@ -3165,11 +3165,11 @@ namespace Editor {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public subjectRow[] GetsubjectRows() {
-                if ((this.Table.ChildRelations["FK_subject_2"] == null)) {
+                if ((this.Table.ChildRelations["subjectType_subject"] == null)) {
                     return new subjectRow[0];
                 }
                 else {
-                    return ((subjectRow[])(base.GetChildRows(this.Table.ChildRelations["FK_subject_2"])));
+                    return ((subjectRow[])(base.GetChildRows(this.Table.ChildRelations["subjectType_subject"])));
                 }
             }
         }
