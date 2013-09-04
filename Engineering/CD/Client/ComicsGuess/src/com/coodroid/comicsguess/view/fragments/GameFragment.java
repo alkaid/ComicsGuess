@@ -1,19 +1,33 @@
 package com.coodroid.comicsguess.view.fragments;
 
-import com.coodroid.comicsguess.R;
-
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MainFragment extends Fragment{
+import com.alkaid.base.extern.baseView.BaseFragment;
+
+/**
+ * 游戏fragment
+ * @author Jiangyinzhi
+ *
+ */
+public class GameFragment extends BaseFragment{
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		inflater.inflate(R.layout.game_main_layout, null);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+	}
+
 }
