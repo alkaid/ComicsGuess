@@ -20,6 +20,7 @@ public class GameFragment extends BaseFragment{
 		
 		
 		
+		
 	}
 
 	@Override
