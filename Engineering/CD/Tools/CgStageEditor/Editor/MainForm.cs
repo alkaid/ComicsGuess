@@ -20,6 +20,7 @@ using DevExpress.XtraGrid;
 using System.Collections;
 using DevExpress.XtraEditors.Repository;
 using System.IO;
+using DevExpress.XtraBars.Alerter;
 
 
 namespace Editor
@@ -40,8 +41,13 @@ namespace Editor
         string audioDir = @"audios/";
         string videoDir = @"videos/";
 
-        //private enum CurrentMouseRightClickIn { none,catalog,stage,subject}
-        //private CurrentMouseRightClickIn currentMouseRightClickIn = CurrentMouseRightClickIn.none;
+        private enum CurrentMouseRightClickIn { none, catalog, stage, subject };
+        private CurrentMouseRightClickIn currentMouseRightClickIn = CurrentMouseRightClickIn.none;
+        private bool isMouseUpEventConsume;/*代表鼠标右键事件是否已消费*/
+
+        private enum Tab { main, stageType, subjectType, comicsType };
+        private Tab currentTab;
+
         public MainForm()
         {
             InitializeComponent();
@@ -66,6 +72,7 @@ namespace Editor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            switchTab(Tab.main);
             exportDir = Application.StartupPath + exportDir;
             backupDir = Application.StartupPath + backupDir;
             if (!Directory.Exists(backupDir))
@@ -84,12 +91,14 @@ namespace Editor
                         splashScreenManager1.ShowWaitForm();
                         allData = new AllData(fsi.FullName, ds);
                         splashScreenManager1.CloseWaitForm();
-                        MessageBox.Show("成功载人DB，您的工作路径为" + exportDir);
+                        AlertInfo ainfo = new AlertInfo("提示", "成功载人DB，您的工作路径为：" + exportDir);
+                        alertControl1.Show(this, ainfo);
                         return;
                     }
                 }
             }
-            MessageBox.Show("工作路径下没有找到sqlite文件，请点击\"导入DB\".（工作路径:" + exportDir + "）");
+            AlertInfo binfo = new AlertInfo("提示", "成功载人DB，您的工作路径为：\r\n" + "工作路径下没有找到sqlite文件，请点击\"导入DB\".（工作路径:" + exportDir + "）");
+            alertControl1.Show(this, binfo);
         }
 
         private void iOpen_ItemClick(object sender, ItemClickEventArgs e)
@@ -134,7 +143,8 @@ namespace Editor
                 dbPath = dbDestFile;
                 allData = new AllData(dbPath, ds);
                 splashScreenManager1.CloseWaitForm();
-                MessageBox.Show("DB加载成功,原工作目录已删除并备份。您尚未导入图片、音频等资源文件，请点击\"导入资源\"按钮。（工作目录:"+exportDir+"）");
+                AlertInfo ainfo = new AlertInfo("提示", "DB加载成功,原工作目录已删除并备份。您尚未导入图片、音频等资源文件，请点击\"导入资源\"按钮。（工作目录:" + exportDir + "）");
+                alertControl1.Show(this, ainfo);
             }
             //AllData allData = new AllData(AllData.FLAG_TABLE_catalog | AllData.FLAG_TABLE_stage | AllData.FLAG_TABLE_subject);
             //bindingSource1.DataSource = allData.dataSet;
@@ -156,7 +166,8 @@ namespace Editor
                     DeleteFile(exportDir + folderName, true);
                     //复制资源到Export路径
                     int count = CopyDirectory(ofd.SelectedPath, exportDir, true);
-                    MessageBox.Show(ofd.SelectedPath + "目录已拷贝至 工作目录下,共导入了" + count + "个文件。（工作目录：" + exportDir + "）");
+                    AlertInfo ainfo = new AlertInfo("提示", ofd.SelectedPath + "目录已拷贝至 工作目录下,共导入了" + count + "个文件。（工作目录：" + exportDir + "）");
+                    alertControl1.Show(this, ainfo);
                 }
             }
         }
@@ -168,15 +179,36 @@ namespace Editor
 
         private void save()
         {
-            DevExpress.XtraGrid.Views.Base.BaseView view = gridControl.FocusedView;
+            GridControl currentGrid = null;
+            switch (currentTab)
+            {
+                case Tab.comicsType:
+                    currentGrid = gridControlComicsType;
+                    break;
+                case Tab.main:
+                    currentGrid = gridControl;
+                    break;
+                case Tab.stageType:
+                    currentGrid = gridControlStageType;
+                    break;
+                case Tab.subjectType:
+                    currentGrid = gridControlSubjectType;
+                    break;
+            }
+            DevExpress.XtraGrid.Views.Base.BaseView view = currentGrid.FocusedView;
             if (!(view.PostEditor() && view.UpdateCurrentRow()))
             {
                 return;
             }
             if (ds == null || ds.Tables.Count == 0 || ds.Tables["catalog"].Rows.Count == 0)
+            {
+                AlertInfo einfo = new AlertInfo("提示", "表中无数据，无法保存");
+                alertControl1.Show(this, einfo);
                 return;
-            MessageBox.Show("保存成功");
+            }
             allData.update();
+            AlertInfo ainfo = new AlertInfo("提示", "保存成功");
+            alertControl1.Show(this, ainfo);
             if (existUnCommitAdd)
             {
                 ds.Clear();
@@ -198,34 +230,61 @@ namespace Editor
 
         private void gridView1_MouseUp(object sender, MouseEventArgs e)
         {
-            //if(currentMouseRightClickIn==CurrentMouseRightClickIn.none)
-            //    currentMouseRightClickIn = CurrentMouseRightClickIn.catalog;
-            showContextMenu_MouseRightClick(e);
+            if (!isMouseUpEventConsume)
+            {
+                currentMouseRightClickIn = CurrentMouseRightClickIn.catalog;
+                showContextMenu_MouseRightClick(e);
+            }
+            isMouseUpEventConsume = false;
         }
-        private void stage_MouseUp(object sender, MouseEventArgs e)
+        private void gridView2_MouseUp(object sender, MouseEventArgs e)
         {
-            //currentMouseRightClickIn = CurrentMouseRightClickIn.stage;
-            showContextMenu_MouseRightClick(e);
+            if (!isMouseUpEventConsume)
+            {
+                currentMouseRightClickIn = CurrentMouseRightClickIn.stage;
+                showContextMenu_MouseRightClick(e);
+                isMouseUpEventConsume = true;
+            }
         }
-        private void subject_MouseUp(object sender, MouseEventArgs e)
+        private void layoutView1_MouseUp(object sender, MouseEventArgs e)
         {
-            //currentMouseRightClickIn = CurrentMouseRightClickIn.subject;
-            showContextMenu_MouseRightClick(e);
+            if (!isMouseUpEventConsume)
+            {
+                currentMouseRightClickIn = CurrentMouseRightClickIn.subject;
+                showContextMenu_MouseRightClick(e);
+                isMouseUpEventConsume = true;
+            }
         }
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            
             ColumnView currentView = gridControl.FocusedView as ColumnView;
+            int currentRowHandler=currentView.FocusedRowHandle;
+            //添加
             if (((ContextMenuStrip)sender).Items[0] == e.ClickedItem)
             {
                 currentView.AddNewRow();
             }
+            //删除
             else if (((ContextMenuStrip)sender).Items[1] == e.ClickedItem)
             {
                 currentView.DeleteSelectedRows();
             }
-            
-            //currentMouseRightClickIn = CurrentMouseRightClickIn.none;
+            //添加子项
+            else if (((ContextMenuStrip)sender).Items[2] == e.ClickedItem)
+            {
+                if (currentMouseRightClickIn == CurrentMouseRightClickIn.stage || currentMouseRightClickIn == CurrentMouseRightClickIn.catalog)
+                {
+                    GridView view = (GridView)currentView;
+                    view.ExpandMasterRow(currentRowHandler);
+                    ColumnView childView = (ColumnView)view.GetDetailView(currentRowHandler, 0);
+                    childView.AddNewRow();
+                }
+
+            }
+
+            currentMouseRightClickIn = CurrentMouseRightClickIn.none;
             
         }
 
@@ -361,9 +420,49 @@ namespace Editor
 
         private void layoutView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Layout.Events.LayoutViewCustomRowCellEditEventArgs e)
         {
-            if (e.Column.FieldName == "imgDisplay")
+            //if (e.Column.FieldName == "imgDisplay")
+            //{
+            //    RepositoryItemPictureEdit picEdit = (RepositoryItemPictureEdit)e.RepositoryItem;
+            //}
+        }
+
+        private void switchTab(Tab tab)
+        {
+            currentTab = tab;
+            switch (tab)
             {
-                RepositoryItemPictureEdit picEdit = (RepositoryItemPictureEdit)e.RepositoryItem;
+                case Tab.main:
+                    panelMain.Dock = DockStyle.Fill;
+                    gridControl.Dock = DockStyle.Fill;
+                    panelMain.Visible = true;
+                    panelComicsType.Visible = false;
+                    panelStageType.Visible = false;
+                    panelSubjectType.Visible = false;
+                    break;
+                case Tab.comicsType:
+                    panelComicsType.Dock = DockStyle.Fill;
+                    gridControlComicsType.Dock = DockStyle.Fill;
+                    panelComicsType.Visible = true;
+                    panelMain.Visible = false;
+                    panelStageType.Visible = false;
+                    panelSubjectType.Visible = false;
+                    break;
+                case Tab.stageType:
+                    panelStageType.Dock = DockStyle.Fill;
+                    gridControlStageType.Dock = DockStyle.Fill;
+                    panelStageType.Visible = true;
+                    panelComicsType.Visible = false;
+                    panelMain.Visible = false;
+                    panelSubjectType.Visible = false;
+                    break;
+                case Tab.subjectType:
+                    panelSubjectType.Dock = DockStyle.Fill;
+                    gridControlSubjectType.Dock = DockStyle.Fill;
+                    panelSubjectType.Visible = true;
+                    panelComicsType.Visible = false;
+                    panelStageType.Visible = false;
+                    panelMain.Visible = false;
+                    break;
             }
         }
 
@@ -467,6 +566,37 @@ namespace Editor
                 s += str.Substring(r.Next(0, str.Length - 1), 1);
             }
             return s;
+        }
+
+        private void subjectItem_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            switchTab(Tab.main);
+        }
+
+        private void stageTypeItem_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            switchTab(Tab.stageType);
+        }
+
+        private void subjectTypeItem_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            switchTab(Tab.subjectType);
+        }
+
+        private void comicsTypeItem_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            switchTab(Tab.comicsType);
+        }
+
+        private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "选择一个音频文件";
+            ofd.Filter = "音频|*.wma,*.mp3,*.wav";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+
+            }
         }
 
        
