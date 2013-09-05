@@ -2,7 +2,6 @@ package com.coodroid.comicsguess.data;
 
 import java.util.ArrayList;
 
-import com.coodroid.comicsguess.data.DBSql.DBHelper;
 import com.coodroid.comicsguess.model.StageModel;
 import com.coodroid.comicsguess.model.StageTypeModel;
 import com.coodroid.comicsguess.model.SubjectModel;

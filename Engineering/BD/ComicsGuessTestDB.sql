@@ -9,7 +9,7 @@ Target Server Type    : SQLite
 Target Server Version : 30706
 File Encoding         : 65001
 
-Date: 2013-09-02 10:26:12
+Date: 2013-09-05 10:29:33
 */
 
 PRAGMA foreign_keys = OFF;
@@ -192,36 +192,36 @@ INSERT INTO "main"."subject" VALUES (10, '芥辺', 1, null, 1, 4, null, null, '�
 1、无眉 
 2、欺负恶魔 
 3、不择手段 ', null, null, '第一个字：芥', null, '芥辺', 0, 'false');
-INSERT INTO "main"."subject" VALUES (11, '索隆', 1, null, 1, 5, null, 'imgs/1/gc_img_11.jpg', null, null, null, '第一个字：索', null, '索隆', 0, 'false');
-INSERT INTO "main"."subject" VALUES (12, '草摩由希(水果篮子)', 1, null, 1, 0, null, 'imgs/1/gc_img_12.jpg', null, null, null, '第一个字：草', null, '草摩由希', 0, 'false');
-INSERT INTO "main"."subject" VALUES (13, '一平(家庭教师)', 1, null, 1, 1, null, 'imgs/1/gc_img_13.jpg', null, null, null, '第二个字：平', null, '一平', 0, 'false');
-INSERT INTO "main"."subject" VALUES (14, '纳兹', 1, null, 1, 2, null, 'imgs/1/gc_img_14.jpg', null, null, null, '第一个字：纳', null, '纳兹', 0, 'false');
-INSERT INTO "main"."subject" VALUES (15, '黑崎一护', 1, null, 1, 3, null, 'imgs/1/gc_img_15.jpg', null, null, null, '第一个字：黑', null, '黑崎一护', 0, 'false');
-INSERT INTO "main"."subject" VALUES (16, '柯南', 1, null, 1, 4, null, 'imgs/1/gc_img_16.jpg', null, null, null, '第一个字：柯', null, '柯南', 0, 'false');
-INSERT INTO "main"."subject" VALUES (17, '七龙珠', 2, null, 1, 5, null, 'imgs/1/gc_img_17.jpg', null, null, null, '第一个字：七', null, '七龙珠', 0, 'false');
-INSERT INTO "main"."subject" VALUES (18, '大力水手', 2, null, 1, 0, null, 'imgs/1/gc_img_18.jpg', null, null, null, '第一个字：大', null, '大力水手', 0, 'false');
-INSERT INTO "main"."subject" VALUES (19, '阿童木', 1, null, 1, 1, null, 'imgs/1/gc_img_19.jpg', null, null, null, '第一个字：阿', null, '阿童木', 0, 'false');
-INSERT INTO "main"."subject" VALUES (20, '忍者神龟', 2, null, 1, 2, null, 'imgs/1/gc_img_20.jpg', null, null, null, '第一个字：忍', null, '忍者神龟', 0, 'false');
+INSERT INTO "main"."subject" VALUES (11, '索隆', 1, null, 1, 5, null, '1/gc_img_11.jpg', null, null, null, '第一个字：索', null, '索隆', 0, 'false');
+INSERT INTO "main"."subject" VALUES (12, '草摩由希(水果篮子)', 1, null, 1, 0, null, '1/gc_img_12.jpg', null, null, null, '第一个字：草', null, '草摩由希', 0, 'false');
+INSERT INTO "main"."subject" VALUES (13, '一平(家庭教师)', 1, null, 1, 1, null, '1/gc_img_13.jpg', null, null, null, '第二个字：平', null, '一平', 0, 'false');
+INSERT INTO "main"."subject" VALUES (14, '纳兹', 1, null, 1, 2, null, '1/gc_img_14.jpg', null, null, null, '第一个字：纳', null, '纳兹', 0, 'false');
+INSERT INTO "main"."subject" VALUES (15, '黑崎一护', 1, null, 1, 3, null, '1/gc_img_15.jpg', null, null, null, '第一个字：黑', null, '黑崎一护', 0, 'false');
+INSERT INTO "main"."subject" VALUES (16, '柯南', 1, null, 1, 4, null, '1/gc_img_16.jpg', null, null, null, '第一个字：柯', null, '柯南', 0, 'false');
+INSERT INTO "main"."subject" VALUES (17, '七龙珠', 2, null, 1, 5, null, '1/gc_img_17.jpg', null, null, null, '第一个字：七', null, '七龙珠', 0, 'false');
+INSERT INTO "main"."subject" VALUES (18, '大力水手', 2, null, 1, 0, null, '1/gc_img_18.jpg', null, null, null, '第一个字：大', null, '大力水手', 0, 'false');
+INSERT INTO "main"."subject" VALUES (19, '阿童木', 1, null, 1, 1, null, '1/gc_img_19.jpg', null, null, null, '第一个字：阿', null, '阿童木', 0, 'false');
+INSERT INTO "main"."subject" VALUES (20, '忍者神龟', 2, null, 1, 2, null, '1/gc_img_20.jpg', null, null, null, '第一个字：忍', null, '忍者神龟', 0, 'false');
 INSERT INTO "main"."subject" VALUES (21, 'IO博士', 2, null, 1, 3, null, null, '耸人听闻！近视少女人头分离！', null, null, '第一个字：I', null, 'IO博士', 0, 'false');
 INSERT INTO "main"."subject" VALUES (22, '圣斗士星矢', 2, null, 1, 4, null, null, '销魂！白衣女子玩弄五男生一生!', null, null, '第一个字：圣', null, '圣斗士星矢', 0, 'false');
 INSERT INTO "main"."subject" VALUES (23, '机器猫', 2, null, 1, 5, null, null, '自强不息！无指少年科技创新搞发明', null, null, '第一个字：机', null, '机器猫', 0, 'false');
 INSERT INTO "main"."subject" VALUES (24, '夏目友人帐', 2, null, 1, 0, null, null, '1.妖怪 2.治愈系 3.卖萌老师', null, null, '第一个字：夏', null, '夏目友人帐', 0, 'false');
-INSERT INTO "main"."subject" VALUES (25, '小智', 1, null, 1, 1, null, 'imgs/1/gc_img_25.jpg', null, null, null, '第二个字：智', null, '小智', 0, 'false');
-INSERT INTO "main"."subject" VALUES (26, '我爱罗', 1, null, 1, 2, null, 'imgs/1/gc_img_26.jpg', null, null, null, '第一个字：我', null, '我爱罗', 0, 'false');
-INSERT INTO "main"."subject" VALUES (27, '星矢', 1, null, 1, 3, null, 'imgs/1/gc_img_27.jpg', null, null, null, '第一个字：星', null, '星矢', 0, 'false');
-INSERT INTO "main"."subject" VALUES (28, '大雄', 1, null, 1, 4, null, 'imgs/1/gc_img_28.jpg', null, null, null, '第一个字：大', null, '大雄', 0, 'false');
-INSERT INTO "main"."subject" VALUES (29, '葫芦娃', 2, null, 1, 5, null, 'imgs/1/gc_img_29.jpg', null, null, null, '第一个字：葫', null, '葫芦娃', 0, 'false');
-INSERT INTO "main"."subject" VALUES (30, '夏娜', 1, null, 1, 0, null, 'imgs/1/gc_img_30.jpg', null, null, null, '第一个字：夏', null, '夏娜', 0, 'false');
+INSERT INTO "main"."subject" VALUES (25, '小智', 1, null, 1, 1, null, '1/gc_img_25.jpg', null, null, null, '第二个字：智', null, '小智', 0, 'false');
+INSERT INTO "main"."subject" VALUES (26, '我爱罗', 1, null, 1, 2, null, '1/gc_img_26.jpg', null, null, null, '第一个字：我', null, '我爱罗', 0, 'false');
+INSERT INTO "main"."subject" VALUES (27, '星矢', 1, null, 1, 3, null, '1/gc_img_27.jpg', null, null, null, '第一个字：星', null, '星矢', 0, 'false');
+INSERT INTO "main"."subject" VALUES (28, '大雄', 1, null, 1, 4, null, '1/gc_img_28.jpg', null, null, null, '第一个字：大', null, '大雄', 0, 'false');
+INSERT INTO "main"."subject" VALUES (29, '葫芦娃', 2, null, 1, 5, null, '1/gc_img_29.jpg', null, null, null, '第一个字：葫', null, '葫芦娃', 0, 'false');
+INSERT INTO "main"."subject" VALUES (30, '夏娜', 1, null, 1, 0, null, '1/gc_img_30.jpg', null, null, null, '第一个字：夏', null, '夏娜', 0, 'false');
 INSERT INTO "main"."subject" VALUES (31, '水木', 1, null, 2, 1, null, null, '鸣人被谁蛊惑去偷封印之书', null, null, '第一个字：水', null, '水木', 0, 'false');
 INSERT INTO "main"."subject" VALUES (32, '波风水门', 1, null, 2, 2, null, null, '鸣人的父亲是谁', null, null, '第一个字：波', null, '波风水门', 0, 'false');
-INSERT INTO "main"."subject" VALUES (33, '卡卡西', 1, null, 2, 3, null, 'imgs/1/gc_img_33.jpg', null, null, null, '第一个字：卡', null, '卡卡西', 0, 'false');
-INSERT INTO "main"."subject" VALUES (34, '鹿丸', 1, null, 2, 4, null, 'imgs/1/gc_img_34.jpg', null, null, null, '第一个字：鹿', null, '鹿丸', 0, 'false');
-INSERT INTO "main"."subject" VALUES (35, '宇智波佐助', 1, null, 2, 5, null, 'imgs/1/gc_img_35.jpg', null, null, null, '第一个字：宇', null, '宇智波佐助', 0, 'false');
-INSERT INTO "main"."subject" VALUES (36, '李洛克', 1, null, 2, 0, null, 'imgs/1/gc_img_36.jpg', null, null, null, '第一个字：李', null, '李洛克', 0, 'false');
-INSERT INTO "main"."subject" VALUES (37, '宇智波鼬', 1, null, 2, 1, null, 'imgs/1/gc_img_37.jpg', null, null, null, '第一个字：宇', null, '宇智波鼬', 0, 'false');
-INSERT INTO "main"."subject" VALUES (38, '自来也', 1, null, 2, 2, null, 'imgs/1/gc_img_38.jpg', null, null, null, '第一个字：自', null, '自来也', 0, 'false');
-INSERT INTO "main"."subject" VALUES (39, '春野樱', 1, null, 2, 3, null, 'imgs/1/gc_img_39.jpg', null, null, null, '第一个字：春', null, '春野樱', 0, 'false');
-INSERT INTO "main"."subject" VALUES (40, '日向宁次', 1, null, 2, 5, null, 'imgs/1/gc_img_40.jpg', null, null, null, '第一个字：日', null, '日向宁次', 0, 'false');
+INSERT INTO "main"."subject" VALUES (33, '卡卡西', 1, null, 2, 3, null, '1/gc_img_33.jpg', null, null, null, '第一个字：卡', null, '卡卡西', 0, 'false');
+INSERT INTO "main"."subject" VALUES (34, '鹿丸', 1, null, 2, 4, null, '1/gc_img_34.jpg', null, null, null, '第一个字：鹿', null, '鹿丸', 0, 'false');
+INSERT INTO "main"."subject" VALUES (35, '宇智波佐助', 1, null, 2, 5, null, '1/gc_img_35.jpg', null, null, null, '第一个字：宇', null, '宇智波佐助', 0, 'false');
+INSERT INTO "main"."subject" VALUES (36, '李洛克', 1, null, 2, 0, null, '1/gc_img_36.jpg', null, null, null, '第一个字：李', null, '李洛克', 0, 'false');
+INSERT INTO "main"."subject" VALUES (37, '宇智波鼬', 1, null, 2, 1, null, '1/gc_img_37.jpg', null, null, null, '第一个字：宇', null, '宇智波鼬', 0, 'false');
+INSERT INTO "main"."subject" VALUES (38, '自来也', 1, null, 2, 2, null, '1/gc_img_38.jpg', null, null, null, '第一个字：自', null, '自来也', 0, 'false');
+INSERT INTO "main"."subject" VALUES (39, '春野樱', 1, null, 2, 3, null, '1/gc_img_39.jpg', null, null, null, '第一个字：春', null, '春野樱', 0, 'false');
+INSERT INTO "main"."subject" VALUES (40, '日向宁次', 1, null, 2, 5, null, '1/gc_img_40.jpg', null, null, null, '第一个字：日', null, '日向宁次', 0, 'false');
 
 -- ----------------------------
 -- Table structure for "main"."subjectType"
