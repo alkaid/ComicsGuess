@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <!-- 游戏主界面logo图片 -->
+    <ImageView 
+        android:id="@+id/main_title_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dip"
+        android:src="@drawable/main_logo"/>
+    
+    <!-- 进入关卡模式的按钮 -->
+    <Button 
+        android:id="@+id/main_level_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/main_title_img"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/main_level_btn"/>
+    
+        <!-- 进入挑战模式的按钮 -->
+    <Button 
+        android:id="@+id/main_challenge_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/main_level_btn"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/main_challenge_btn"/>
+    
+        <!-- 进入吐槽模式的按钮 -->
+    <Button 
+        android:id="@+id/main_share_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/main_challenge_btn"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/main_share_btn"/>
+    
+    
+    	<!-- 进入设置的按钮 -->
+    <Button 
+        android:id="@+id/main_setting_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="10dip"/>
+
+        	<!-- 退出游戏的按钮 -->
+    <Button 
+        android:id="@+id/main_exit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginRight="10dip"/>
+</RelativeLayout>
