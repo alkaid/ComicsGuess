@@ -60,9 +60,23 @@ namespace Editor {
             }
         }
         
+        internal static System.Drawing.Bitmap icon_play {
+            get {
+                object obj = ResourceManager.GetObject("icon_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Icon_Simple_Error {
             get {
                 object obj = ResourceManager.GetObject("Icon_Simple_Error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap icon_unplay {
+            get {
+                object obj = ResourceManager.GetObject("icon_unplay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

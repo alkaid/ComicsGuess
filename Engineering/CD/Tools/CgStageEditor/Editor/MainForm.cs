@@ -37,9 +37,6 @@ namespace Editor
         private Hashtable Images = new Hashtable();
         string exportDir = @"\Export\";
         string backupDir = @"\Backup\";
-        string imgDir = @"imgs/";
-        string audioDir = @"audios/";
-        string videoDir = @"videos/";
 
         private enum CurrentMouseRightClickIn { none, catalog, stage, subject };
         private CurrentMouseRightClickIn currentMouseRightClickIn = CurrentMouseRightClickIn.none;
@@ -294,9 +291,12 @@ namespace Editor
             allData = new AllData(dbPath, ds);
         }
 
+        //自定义非绑定列 这里包括图片资源和音频资源播放
         private void layoutView1_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
         {
-            if (e.Column.FieldName == "imgDisplay" && e.IsGetData)
+            if (!e.IsGetData)
+                return;
+            if (e.Column.FieldName == "imgDisplay")
             {
                 GridView view = sender as GridView;
                 string fileName = null;
@@ -306,7 +306,7 @@ namespace Editor
                     e.Value = Resource1.Icon_Simple_Error;
                     return;
                 }
-                fileName = (string)((DataRowView)e.Row)["resImg"];
+                fileName = (string)dbFileName;
                 if (!Images.ContainsKey(fileName))
                 {
                     Image img = null;
@@ -324,6 +324,29 @@ namespace Editor
                 }
                 e.Value = Images[fileName];
             }
+            else if (e.Column.FieldName=="audioDisplay")
+            {
+                GridView view = sender as GridView;
+                string fileName = null;
+                object dbFileName = ((DataRowView)e.Row)["resAudio"];
+                //无数据时指定该音频的icon
+                if (dbFileName is System.DBNull)
+                {
+                    e.Value = Resource1.icon_unplay;
+                    return;
+                }
+                fileName = (string)dbFileName;
+                //文件存在时指定该音频icon
+                if (File.Exists(exportDir + fileName))
+                {
+                    e.Value = Resource1.icon_play;
+                }
+                else
+                {
+                    e.Value = Resource1.icon_unplay;
+                }
+            }
+            
         }
 
         private void layoutView1_CellValueChanged(object sender, CellValueChangedEventArgs e)
@@ -386,7 +409,7 @@ namespace Editor
             //生成图片名称 保存新图
             string ext = e.FileName.Substring(e.FileName.LastIndexOf(".")); //由原文件获得扩展名
             string imgName = generateFileName(catalogId, stageId, subjectId, "img") + ext;
-            resImg = imgDir + catalogId + "/" + imgName;
+            resImg = catalogId + "/" + imgName;
             string imgPath = exportDir + resImg;
             File.Copy(e.FileName, imgPath, true);
             
@@ -595,7 +618,62 @@ namespace Editor
             ofd.Filter = "音频|*.wma,*.mp3,*.wav";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                //repositoryItemMyPictureEdit1.FileName = e.FileName;
+                ColumnView currentView = gridControl.FocusedView as ColumnView;
+                int r = currentView.FocusedRowHandle;
+                //获得stageId、catalogId、subjectId
+                int subjectId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["id"]));
+                int stageId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["stage"]));
+                coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
+                int catalogId = s.catalog;
+                //获得原resAudio字段
+                object objresAudio = currentView.GetRowCellValue(r, currentView.Columns["resAudio"]);
+                string resAudio = "";
+                if (null == objresAudio || objresAudio is System.DBNull) { }
+                else
+                {
+                    resAudio = objresAudio.ToString();
+                }
 
+                string oldresAudio = resAudio;
+
+                //生成音频名称 保存新音频
+                string ext = ofd.FileName.Substring(ofd.FileName.LastIndexOf(".")); //由原文件获得扩展名
+                string audionName = generateFileName(catalogId, stageId, subjectId, "audio") + ext;
+                resAudio = catalogId + "/" + audionName;
+                string audioPath = exportDir + resAudio;
+                File.Copy(ofd.FileName, audioPath, true);
+
+                //更新resAudio字段
+                currentView.SetRowCellValue(r, currentView.Columns["resAudio"], resAudio);//执行此句代码时，会触发layoutView1_CustomUnboundColumnData事件，就会自动更新audioDisplay列，所以屏蔽下面代码
+                //save();
+                //删除原音频
+                if (oldresAudio != "")
+                {
+                    //Image old = (Image)Images[oldResImg];
+                    //Images.Remove(oldResImg);
+                    //old.Dispose();
+                    File.Delete(exportDir + oldresAudio);
+                }
+            }
+        }
+
+        private void repoPicEditAudio_Click(object sender, EventArgs e)
+        {
+            ColumnView currentView = gridControl.FocusedView as ColumnView;
+            int r = currentView.FocusedRowHandle;
+            string fileName = null;
+            object dbFileName = currentView.GetRowCellValue(r,currentView.Columns["resAudio"]);
+            //无数据时指定该音频的icon
+            if (dbFileName is System.DBNull)
+            {
+                return;
+            }
+            fileName = (string)dbFileName;
+            //文件存在时指定该音频icon
+            if (File.Exists(exportDir + fileName))
+            {
+                //TODO 播放
             }
         }
 
