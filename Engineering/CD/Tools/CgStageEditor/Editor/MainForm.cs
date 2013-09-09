@@ -42,14 +42,21 @@ namespace Editor
         private CurrentMouseRightClickIn currentMouseRightClickIn = CurrentMouseRightClickIn.none;
         private bool isMouseUpEventConsume;/*代表鼠标右键事件是否已消费*/
 
-        private enum Tab { main, stageType, subjectType, comicsType };
+        private coodroid.BLL.model.subject subjectService;
+        private coodroid.BLL.model.stage stageService;
+
+        private enum Tab { main, stageType, subjectType, comicsType, subject };
         private Tab currentTab;
+        private GridControl currentGridCtrl;
+
+        private clsMCIPlay.clsMCI player;
 
         public MainForm()
         {
             InitializeComponent();
             InitSkinGallery();
             InitGrid();
+            InitVariable();
 
         }
         void InitSkinGallery()
@@ -66,10 +73,10 @@ namespace Editor
             //gridDataList.Add(new Person("Gabriella", "Smith", "some comment"));
             //gridControl.DataSource = gridDataList;
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private void InitVariable()
         {
-            switchTab(Tab.main);
+            subjectService = new coodroid.BLL.model.subject();
+            stageService = new coodroid.BLL.model.stage();
             exportDir = Application.StartupPath + exportDir;
             backupDir = Application.StartupPath + backupDir;
             if (!Directory.Exists(backupDir))
@@ -77,6 +84,12 @@ namespace Editor
                 Directory.CreateDirectory(backupDir);
             }
             ds = (DataSet)fullDataBindingSource.DataSource;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            switchTab(Tab.main);
+            
             //查找Export下是否存在DB
             DirectoryInfo info = new DirectoryInfo(exportDir);
             if (Directory.Exists(exportDir))
@@ -86,7 +99,8 @@ namespace Editor
                     if (fsi is System.IO.FileInfo && fsi.Name.Contains(".db"))
                     {   //如果是DB，加载DB
                         splashScreenManager1.ShowWaitForm();
-                        allData = new AllData(fsi.FullName, ds);
+                        dbPath = fsi.FullName;
+                        allData = new AllData(dbPath, ds);
                         splashScreenManager1.CloseWaitForm();
                         AlertInfo ainfo = new AlertInfo("提示", "成功载人DB，您的工作路径为：" + exportDir);
                         alertControl1.Show(this, ainfo);
@@ -94,7 +108,7 @@ namespace Editor
                     }
                 }
             }
-            AlertInfo binfo = new AlertInfo("提示", "成功载人DB，您的工作路径为：\r\n" + "工作路径下没有找到sqlite文件，请点击\"导入DB\".（工作路径:" + exportDir + "）");
+            AlertInfo binfo = new AlertInfo("提示", "工作路径下没有找到sqlite文件，请点击\"导入DB\".（工作路径:" + exportDir + "）");
             alertControl1.Show(this, binfo);
         }
 
@@ -253,10 +267,10 @@ namespace Editor
             }
         }
 
+        //右键菜单
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            
-            ColumnView currentView = gridControl.FocusedView as ColumnView;
+            ColumnView currentView = currentGridCtrl.FocusedView as ColumnView;
             int currentRowHandler=currentView.FocusedRowHandle;
             //添加
             if (((ContextMenuStrip)sender).Items[0] == e.ClickedItem)
@@ -285,10 +299,16 @@ namespace Editor
             
         }
 
+        //刷新按钮
         private void iExit_ItemClick(object sender, ItemClickEventArgs e)
         {
+            splashScreenManager1.ShowWaitForm();
             ds.Clear();
             allData = new AllData(dbPath, ds);
+            splashScreenManager1.CloseWaitForm();
+            AlertInfo ainfo = new AlertInfo("提示", "成功重载DB");
+            alertControl1.Show(this, ainfo);
+            
         }
 
         //自定义非绑定列 这里包括图片资源和音频资源播放
@@ -298,7 +318,7 @@ namespace Editor
                 return;
             if (e.Column.FieldName == "imgDisplay")
             {
-                GridView view = sender as GridView;
+                //GridView view = sender as GridView;
                 string fileName = null;
                 object dbFileName = ((DataRowView)e.Row)["resImg"];
                 if (dbFileName is System.DBNull)
@@ -386,14 +406,21 @@ namespace Editor
 
         private void repositoryItemMyPictureEdit1_ImageLoaded(object sender, MyPictureEdit.ImageLoadedEventArgs e)
         {
+            bool isNewData = false;
             MyPictureEdit.RepositoryItemMyPictureEdit repoPicEdit = (MyPictureEdit.RepositoryItemMyPictureEdit)sender;
             //repositoryItemMyPictureEdit1.FileName = e.FileName;
-            ColumnView currentView = gridControl.FocusedView as ColumnView;
+            ColumnView currentView = currentGridCtrl.FocusedView as ColumnView;
             int r=currentView.FocusedRowHandle;
             //获得stageId、catalogId、subjectId
             int subjectId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["id"]));
+            if (subjectId <= 0)
+            {
+                //TODO 新增项
+                isNewData = true;
+                subjectId =subjectService.GetMaxId();
+            }
             int stageId = Convert.ToInt32(currentView.GetRowCellValue(r,currentView.Columns["stage"]));
-            coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
+            coodroid.Model.model.stage s = stageService.GetModel(stageId);
             int catalogId = s.catalog;
             //获得原resImg字段
             object objResImg = currentView.GetRowCellValue(r, currentView.Columns["resImg"]);
@@ -410,12 +437,19 @@ namespace Editor
             string ext = e.FileName.Substring(e.FileName.LastIndexOf(".")); //由原文件获得扩展名
             string imgName = generateFileName(catalogId, stageId, subjectId, "img") + ext;
             resImg = catalogId + "/" + imgName;
+            string parentDir = exportDir + catalogId + "/";
+            System.IO.Directory.CreateDirectory(parentDir);
             string imgPath = exportDir + resImg;
             File.Copy(e.FileName, imgPath, true);
-            
+
             //更新resImg字段
             currentView.SetRowCellValue(r, currentView.Columns["resImg"], resImg);//执行此句代码时，会触发layoutView1_CustomUnboundColumnData事件，就会自动更新imgDisplay列，所以屏蔽下面代码
-            //save();
+            //如果是更新才保存，新增不保存，因为新增的数据很多字段都不能为空，保存会报错。但是若存在新行的情况下去更新其他行的数据，此种情况还不知如何解决。
+            if (!isNewData)
+            {
+                save();
+            }
+            
             
             //更新Images 更新imgDisplay
             /*Image img = null;
@@ -441,6 +475,91 @@ namespace Editor
             
         }
 
+        private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            bool isNewData = false;
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "选择一个音频文件";
+            ofd.Filter = "音频|*.wma;*.mp3;*.wav";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                //repositoryItemMyPictureEdit1.FileName = e.FileName;
+                ColumnView currentView = currentGridCtrl.FocusedView as ColumnView;
+                int r = currentView.FocusedRowHandle;
+                //获得stageId、catalogId、subjectId
+                int subjectId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["id"]));
+                if (subjectId <= 0)
+                {
+                    //TODO 新增项
+                    isNewData = true;
+                    subjectId = subjectService.GetMaxId();
+                }
+                int stageId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["stage"]));
+                coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
+                int catalogId = s.catalog;
+                //获得原resAudio字段
+                object objresAudio = currentView.GetRowCellValue(r, currentView.Columns["resAudio"]);
+                string resAudio = "";
+                if (null == objresAudio || objresAudio is System.DBNull) { }
+                else
+                {
+                    resAudio = objresAudio.ToString();
+                }
+
+                string oldresAudio = resAudio;
+
+                //生成音频名称 保存新音频
+                string ext = ofd.FileName.Substring(ofd.FileName.LastIndexOf(".")); //由原文件获得扩展名
+                string audionName = generateFileName(catalogId, stageId, subjectId, "audio") + ext;
+                resAudio = catalogId + "/" + audionName;
+                string audioPath = exportDir + resAudio;
+                string parentDir = exportDir + catalogId + "/";
+                System.IO.Directory.CreateDirectory(parentDir);
+                File.Copy(ofd.FileName, audioPath, true);
+
+                //更新resAudio字段
+                currentView.SetRowCellValue(r, currentView.Columns["resAudio"], resAudio);//执行此句代码时，会触发layoutView1_CustomUnboundColumnData事件，就会自动更新audioDisplay列，所以屏蔽下面代码
+                //如果是更新才保存，新增不保存，因为新增的数据很多字段都不能为空，保存会报错
+                if (!isNewData)
+                {
+                    save();
+                }
+                //删除原音频
+                if (oldresAudio != "")
+                {
+                    //Image old = (Image)Images[oldResImg];
+                    //Images.Remove(oldResImg);
+                    //old.Dispose();
+                    File.Delete(exportDir + oldresAudio);
+                }
+            }
+        }
+
+        private void repoPicEditAudio_Click(object sender, EventArgs e)
+        {
+            ColumnView currentView = currentGridCtrl.FocusedView as ColumnView;
+            int r = currentView.FocusedRowHandle;
+            string fileName = null;
+            object dbFileName = currentView.GetRowCellValue(r, currentView.Columns["resAudio"]);
+
+            if (dbFileName is System.DBNull)
+            {
+                return;
+            }
+            fileName = (string)dbFileName;
+
+            if (File.Exists(exportDir + fileName))
+            {
+                //TODO 播放
+                if (null != player)
+                {
+                    player.StopT();
+                }
+                player = new clsMCIPlay.clsMCI(exportDir + fileName);
+                player.play();
+            }
+        }
+
         private void layoutView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Layout.Events.LayoutViewCustomRowCellEditEventArgs e)
         {
             //if (e.Column.FieldName == "imgDisplay")
@@ -455,33 +574,51 @@ namespace Editor
             switch (tab)
             {
                 case Tab.main:
+                    currentGridCtrl = gridControl;
                     panelMain.Dock = DockStyle.Fill;
                     gridControl.Dock = DockStyle.Fill;
                     panelMain.Visible = true;
                     panelComicsType.Visible = false;
                     panelStageType.Visible = false;
                     panelSubjectType.Visible = false;
+                    panelSubjectAll.Visible = false;
                     break;
                 case Tab.comicsType:
+                    currentGridCtrl = gridControlComicsType;
                     panelComicsType.Dock = DockStyle.Fill;
                     gridControlComicsType.Dock = DockStyle.Fill;
                     panelComicsType.Visible = true;
                     panelMain.Visible = false;
                     panelStageType.Visible = false;
                     panelSubjectType.Visible = false;
+                    panelSubjectAll.Visible = false;
                     break;
                 case Tab.stageType:
+                    currentGridCtrl = gridControlStageType;
                     panelStageType.Dock = DockStyle.Fill;
                     gridControlStageType.Dock = DockStyle.Fill;
                     panelStageType.Visible = true;
                     panelComicsType.Visible = false;
                     panelMain.Visible = false;
                     panelSubjectType.Visible = false;
+                    panelSubjectAll.Visible = false;
                     break;
                 case Tab.subjectType:
+                    currentGridCtrl = gridControlSubjectType;
                     panelSubjectType.Dock = DockStyle.Fill;
                     gridControlSubjectType.Dock = DockStyle.Fill;
                     panelSubjectType.Visible = true;
+                    panelComicsType.Visible = false;
+                    panelStageType.Visible = false;
+                    panelMain.Visible = false;
+                    panelSubjectAll.Visible = false;
+                    break;
+                case Tab.subject:
+                    currentGridCtrl = gridControlSubject;
+                    panelSubjectAll.Dock = DockStyle.Fill;
+                    gridControlSubject.Dock = DockStyle.Fill;
+                    panelSubjectAll.Visible = true;
+                    panelSubjectType.Visible = false;
                     panelComicsType.Visible = false;
                     panelStageType.Visible = false;
                     panelMain.Visible = false;
@@ -611,71 +748,61 @@ namespace Editor
             switchTab(Tab.comicsType);
         }
 
-        private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void subjectAllItem_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "选择一个音频文件";
-            ofd.Filter = "音频|*.wma,*.mp3,*.wav";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            switchTab(Tab.subject);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (null != player)
             {
-                //repositoryItemMyPictureEdit1.FileName = e.FileName;
-                ColumnView currentView = gridControl.FocusedView as ColumnView;
-                int r = currentView.FocusedRowHandle;
-                //获得stageId、catalogId、subjectId
-                int subjectId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["id"]));
-                int stageId = Convert.ToInt32(currentView.GetRowCellValue(r, currentView.Columns["stage"]));
-                coodroid.Model.model.stage s = new coodroid.BLL.model.stage().GetModel(stageId);
-                int catalogId = s.catalog;
-                //获得原resAudio字段
-                object objresAudio = currentView.GetRowCellValue(r, currentView.Columns["resAudio"]);
-                string resAudio = "";
-                if (null == objresAudio || objresAudio is System.DBNull) { }
-                else
-                {
-                    resAudio = objresAudio.ToString();
-                }
-
-                string oldresAudio = resAudio;
-
-                //生成音频名称 保存新音频
-                string ext = ofd.FileName.Substring(ofd.FileName.LastIndexOf(".")); //由原文件获得扩展名
-                string audionName = generateFileName(catalogId, stageId, subjectId, "audio") + ext;
-                resAudio = catalogId + "/" + audionName;
-                string audioPath = exportDir + resAudio;
-                File.Copy(ofd.FileName, audioPath, true);
-
-                //更新resAudio字段
-                currentView.SetRowCellValue(r, currentView.Columns["resAudio"], resAudio);//执行此句代码时，会触发layoutView1_CustomUnboundColumnData事件，就会自动更新audioDisplay列，所以屏蔽下面代码
-                //save();
-                //删除原音频
-                if (oldresAudio != "")
-                {
-                    //Image old = (Image)Images[oldResImg];
-                    //Images.Remove(oldResImg);
-                    //old.Dispose();
-                    File.Delete(exportDir + oldresAudio);
-                }
+                player.StopT();
             }
         }
 
-        private void repoPicEditAudio_Click(object sender, EventArgs e)
+        private void layoutView1_InitNewRow(object sender, InitNewRowEventArgs e)
         {
-            ColumnView currentView = gridControl.FocusedView as ColumnView;
-            int r = currentView.FocusedRowHandle;
-            string fileName = null;
-            object dbFileName = currentView.GetRowCellValue(r,currentView.Columns["resAudio"]);
-            //无数据时指定该音频的icon
-            if (dbFileName is System.DBNull)
-            {
-                return;
-            }
-            fileName = (string)dbFileName;
-            //文件存在时指定该音频icon
-            if (File.Exists(exportDir + fileName))
-            {
-                //TODO 播放
-            }
+            int r = e.RowHandle;
+            ColumnView currentView =sender as ColumnView;
+            currentView.SetRowCellValue(r, currentView.Columns["sorter"], 0);
+            currentView.SetRowCellValue(r, currentView.Columns["level"], 1);
+            currentView.SetRowCellValue(r, currentView.Columns["answer"], "");
+            currentView.SetRowCellValue(r, currentView.Columns["resolved"], false);
+            currentView.SetRowCellValue(r, currentView.Columns["creatdate"], System.DateTime.Now.ToString("yyyy-MM-dd"));
         }
+
+        private void repositoryItemButtonEdit2_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            repositoryItemButtonEdit1_ButtonClick(sender, e);
+        }
+
+        private void repoMyPicEditResImg2_ImageLoaded(object sender, MyPictureEdit.ImageLoadedEventArgs e)
+        {
+            repositoryItemMyPictureEdit1_ImageLoaded(sender, e);
+        }
+
+        private void repoPicEditAudio2_Click(object sender, EventArgs e)
+        {
+            repoPicEditAudio_Click(sender, e);
+        }
+
+        private void layoutView2_MouseUp(object sender, MouseEventArgs e)
+        {
+            showContextMenu_MouseRightClick(e);
+        }
+
+        private void layoutView2_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
+        {
+            layoutView1_CustomUnboundColumnData(sender, e);
+        }
+
+        private void layoutView2_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            layoutView1_InitNewRow(sender, e);
+        }
+
+        
 
        
    

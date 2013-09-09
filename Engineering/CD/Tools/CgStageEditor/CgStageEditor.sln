@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "Editor\Editor.csproj", "{FC7F2C46-FE7D-434D-8AD7-8F1B49C68A60}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{729C0CE7-F394-496C-A99E-F8814B5C5A73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -108,6 +110,14 @@ Global
 		{FC7F2C46-FE7D-434D-8AD7-8F1B49C68A60}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FC7F2C46-FE7D-434D-8AD7-8F1B49C68A60}.Release|x86.ActiveCfg = Release|x86
 		{FC7F2C46-FE7D-434D-8AD7-8F1B49C68A60}.Release|x86.Build.0 = Release|x86
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Debug|.NET.ActiveCfg = Debug
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Debug|Any CPU.ActiveCfg = Debug
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Debug|x86.ActiveCfg = Debug
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Release|.NET.ActiveCfg = Release
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Release|Any CPU.ActiveCfg = Release
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Release|Mixed Platforms.ActiveCfg = Release
+		{729C0CE7-F394-496C-A99E-F8814B5C5A73}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

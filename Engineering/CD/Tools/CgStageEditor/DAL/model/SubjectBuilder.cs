@@ -23,6 +23,14 @@ namespace coodroid.DAL.model
 		/// </summary>
         public override SQLiteCommand createInsertCmd()
 		{
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append("insert into subject(");
+            //strSql.Append("title,subjectType,comicsType,stage,level,remark,resImg,resText,resAudio,creatdate,tip,selectors,answer,sorter,resolved)");
+            //strSql.Append(" values (");
+            //strSql.Append("@title,@subjectType,@comicsType,@stage,@level,@remark,@resImg,@resText,@resAudio,@creatdate,@tip,@selectors,@answer,@sorter,@resolved)");
+            //strSql.Append(";select LAST_INSERT_ROWID()");
+            
+            //return createCmd(strSql, parameters);
             return null;
 		}
 		/// <summary>

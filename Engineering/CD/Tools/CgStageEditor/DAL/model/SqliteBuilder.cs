@@ -54,6 +54,9 @@ namespace coodroid.DAL.model
         {
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(defaultSeletSql, connection);
             SQLiteCommandBuilder builder = new SQLiteCommandBuilder(adapter);
+            SQLiteCommand insertCmd = createInsertCmd();
+            if (null != insertCmd)
+                adapter.InsertCommand = insertCmd;
             //adapter.InsertCommand = createInsertCmd();
             adapter.UpdateCommand = createUpdateCmd();
             adapter.DeleteCommand = createDeleteCmd();
