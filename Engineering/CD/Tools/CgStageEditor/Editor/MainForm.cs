@@ -182,6 +182,18 @@ namespace Editor
                 }
             }
         }
+        //追加资源  不清除原目录
+        private void iAddRes_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FolderBrowserDialog ofd = new FolderBrowserDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                //复制资源到Export路径
+                int count = CopyDirectory(ofd.SelectedPath, exportDir, true);
+                AlertInfo ainfo = new AlertInfo("提示", ofd.SelectedPath + "目录已拷贝至 工作目录下,共导入了" + count + "个文件。（工作目录：" + exportDir + "）");
+                alertControl1.Show(this, ainfo);
+            }
+        }
 
         private void iSave_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -654,7 +666,7 @@ namespace Editor
 
                 if (fsi is System.IO.FileInfo)
                 {          //如果是文件，复制文件
-                    File.Copy(fsi.FullName, destName);
+                    File.Copy(fsi.FullName, destName,true);
                     i++;
                 }
                 else                                    //如果是文件夹，新建文件夹，递归
@@ -801,6 +813,7 @@ namespace Editor
         {
             layoutView1_InitNewRow(sender, e);
         }
+
 
         
 
