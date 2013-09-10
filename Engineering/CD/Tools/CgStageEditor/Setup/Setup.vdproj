@@ -1465,7 +1465,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ComicsGuessEditor"
         "ProductCode" = "8:{194D9AE7-0B11-411C-82FA-0278B121B9C4}"
-        "PackageCode" = "8:{B41F8975-AF39-4E54-B864-275C30B91768}"
+        "PackageCode" = "8:{FD5351C7-3711-40B5-9CC9-06FE42D45D06}"
         "UpgradeCode" = "8:{C35C4ADA-4292-4D66-AA14-6EE6784312ED}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
