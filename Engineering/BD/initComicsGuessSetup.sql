@@ -18,7 +18,7 @@ PRAGMA foreign_keys = OFF;
 -- Table structure for "main"."catalog"
 -- ----------------------------
 DROP TABLE "main"."catalog";
-CREATE TABLE "catalog" (
+CREATE TABLE "main"."catalog" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "name"  VARCHAR(10) NOT NULL
 );
@@ -68,26 +68,10 @@ INSERT INTO "main"."comicsType" VALUES (23, '吸血鬼');
 INSERT INTO "main"."comicsType" VALUES (24, '忍者');
 
 -- ----------------------------
--- Table structure for "main"."sqlite_sequence"
--- ----------------------------
-DROP TABLE "main"."sqlite_sequence";
-CREATE TABLE sqlite_sequence(name,seq);
-
--- ----------------------------
--- Records of sqlite_sequence
--- ----------------------------
-INSERT INTO "main"."sqlite_sequence" VALUES ('catalog', 3);
-INSERT INTO "main"."sqlite_sequence" VALUES ('stageType', 2);
-INSERT INTO "main"."sqlite_sequence" VALUES ('catalog', 2);
-INSERT INTO "main"."sqlite_sequence" VALUES ('stage', 1);
-INSERT INTO "main"."sqlite_sequence" VALUES ('subjectType', 6);
-INSERT INTO "main"."sqlite_sequence" VALUES ('comicsType', 24);
-
--- ----------------------------
 -- Table structure for "main"."stage"
 -- ----------------------------
 DROP TABLE "main"."stage";
-CREATE TABLE "stage" (
+CREATE TABLE "main"."stage" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "name"  VARCHAR(10) NOT NULL,
 "catalog"  INTEGER NOT NULL,
@@ -107,7 +91,7 @@ FOREIGN KEY ("nearSubject") REFERENCES "subject" ("id")
 -- Table structure for "main"."stageType"
 -- ----------------------------
 DROP TABLE "main"."stageType";
-CREATE TABLE "stageType" (
+CREATE TABLE "main"."stageType" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "name"  varchar(10) NOT NULL
 );
@@ -122,7 +106,7 @@ INSERT INTO "main"."stageType" VALUES (2, '主题关卡');
 -- Table structure for "main"."subject"
 -- ----------------------------
 DROP TABLE "main"."subject";
-CREATE TABLE "subject" (
+CREATE TABLE "main"."subject" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "title"  VARCHAR(20),
 "subjectType"  INTEGER,
@@ -152,7 +136,7 @@ CONSTRAINT "fkey2" FOREIGN KEY ("stage") REFERENCES "stage" ("id")
 -- Table structure for "main"."subjectType"
 -- ----------------------------
 DROP TABLE "main"."subjectType";
-CREATE TABLE "subjectType" (
+CREATE TABLE "main"."subjectType" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "name"  VARCHAR(10) NOT NULL
 );
