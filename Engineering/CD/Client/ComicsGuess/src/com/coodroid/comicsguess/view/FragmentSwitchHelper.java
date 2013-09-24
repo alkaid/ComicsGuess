@@ -1,6 +1,6 @@
 package com.coodroid.comicsguess.view;
 
-import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -68,6 +68,7 @@ public class FragmentSwitchHelper {
 				WelcomeFragment welcomeFragment = new WelcomeFragment();
 				ft.replace(R.id.welcome_fragment, welcomeFragment, WELCOME_FRAGMENT);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				controlDisplayFragment(tag,ft);
 				ft.commit();
 			}
 		}else if(tag.equals(MAIN_MENU_FRAGMENT)){
@@ -75,6 +76,7 @@ public class FragmentSwitchHelper {
 				MainMenuFragment mainMenuFragment = new MainMenuFragment();
 				ft.replace(R.id.main_menu_fragment, mainMenuFragment, MAIN_MENU_FRAGMENT);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				controlDisplayFragment(tag,ft);
 				ft.commit();
 			}
 		}else if(tag.equals(LEVEL_SELECT_FRAGMENT)){
@@ -82,6 +84,7 @@ public class FragmentSwitchHelper {
 				LevelSelectFragment levelSelectFragment = new LevelSelectFragment();
 				ft.replace(R.id.level_select_fragment, levelSelectFragment, LEVEL_SELECT_FRAGMENT);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				controlDisplayFragment(tag,ft);
 				ft.commit();
 			}
 		}else if(tag.equals(GAME_FRAGMENT)){
@@ -89,9 +92,59 @@ public class FragmentSwitchHelper {
 				GameFragment gameFragment = new GameFragment();
 				ft.replace(R.id.game_guess_fragment, gameFragment, GAME_FRAGMENT);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				controlDisplayFragment(tag,ft);
 				ft.commit();
 			}
 		}
 		return true;
+	}
+	
+	//控制显示的fragment，显示一个fragment 其他的隐藏
+	private void controlDisplayFragment(String tag,FragmentTransaction ft){
+		Fragment welcomeFragment = fm.findFragmentById(R.id.welcome_fragment);
+		Fragment mainMenuFragment = fm.findFragmentById(R.id.main_menu_fragment);
+		Fragment levelSelectFragment = fm.findFragmentById(R.id.level_select_fragment);
+		Fragment gameFragment = fm.findFragmentById(R.id.game_guess_fragment);
+		if(tag.equals(WELCOME_FRAGMENT)){
+			if(mainMenuFragment!=null){
+				ft.remove(mainMenuFragment);
+			}
+			if(levelSelectFragment!=null){
+				ft.remove(levelSelectFragment);
+			}
+			if(gameFragment!=null){
+				ft.remove(gameFragment);
+			}
+		}else if(tag.equals(MAIN_MENU_FRAGMENT)){
+			if(welcomeFragment!=null){
+				ft.remove(welcomeFragment);
+			}
+			if(levelSelectFragment!=null){
+				ft.remove(levelSelectFragment);
+			}
+			if(gameFragment!=null){
+				ft.remove(gameFragment);
+			}
+		}else if(tag.equals(LEVEL_SELECT_FRAGMENT)){
+			if(welcomeFragment!=null){
+				ft.remove(welcomeFragment);
+			}
+			if(mainMenuFragment!=null){
+				ft.remove(mainMenuFragment);
+			}
+			if(gameFragment!=null){
+				ft.remove(gameFragment);
+			}
+		}else if(tag.equals(GAME_FRAGMENT)){
+			if(welcomeFragment!=null){
+				ft.remove(welcomeFragment);
+			}
+			if(mainMenuFragment!=null){
+				ft.remove(mainMenuFragment);
+			}
+			if(levelSelectFragment!=null){
+				ft.remove(levelSelectFragment);
+			}
+		}
 	}
 }

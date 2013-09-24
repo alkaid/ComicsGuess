@@ -27,6 +27,7 @@ public class MainActivity extends BaseFragmentActivity{
 	private void initView(){
 		this.setContentView(R.layout.main_activity_layout);
 		FragmentSwitchHelper.getInstance().skipFragment(FragmentSwitchHelper.WELCOME_FRAGMENT);
+		
 	}
 
 }
