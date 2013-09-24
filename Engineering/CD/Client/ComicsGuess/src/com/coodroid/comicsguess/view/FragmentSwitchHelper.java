@@ -22,7 +22,7 @@ public class FragmentSwitchHelper {
 	
 	private final String TAG = FragmentSwitchHelper.class.getName();
 	private static FragmentSwitchHelper mInstance = null;
-	private Activity mAct = null;
+	private FragmentActivity mAct = null;
 	private FragmentManager fm = null;
 	
 	/**欢迎界面fragment*/
@@ -48,9 +48,9 @@ public class FragmentSwitchHelper {
 		return mInstance;
 	}
 	
-	public void init(Activity act){
-		mAct = act;
-		fm = ((FragmentActivity)act).getSupportFragmentManager();
+	public void init(FragmentActivity fAct){
+		mAct = fAct;
+		fm = fAct.getSupportFragmentManager();
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class FragmentSwitchHelper {
 			LogUtil.e(TAG, "尚未初始化activity");
 			return false;
 		}
-		FragmentTransaction ft = fm.beginTransaction();
+		final FragmentTransaction ft = fm.beginTransaction();
 		if(tag.equals(WELCOME_FRAGMENT)){
 			if(fm.findFragmentByTag(WELCOME_FRAGMENT)==null){
 				WelcomeFragment welcomeFragment = new WelcomeFragment();

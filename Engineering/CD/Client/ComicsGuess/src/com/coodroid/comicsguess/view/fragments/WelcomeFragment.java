@@ -25,8 +25,8 @@ public class WelcomeFragment extends BaseFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		inflater.inflate(R.layout.welcome_layout, null);
-		return super.onCreateView(inflater, container, savedInstanceState);
+		View view = inflater.inflate(R.layout.welcome_layout, null);
+		return view;
 	}
 	
 	@Override

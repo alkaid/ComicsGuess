@@ -1,6 +1,8 @@
 package com.coodroid.comicsguess;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.coodroid.comicsguess.view.FragmentSwitchHelper;
 import com.coodroid.comicsguess.view.base.BaseFragmentActivity;
@@ -23,6 +25,7 @@ public class MainActivity extends BaseFragmentActivity{
 	
 	//初始化界面
 	private void initView(){
+		this.setContentView(R.layout.main_activity_layout);
 		FragmentSwitchHelper.getInstance().skipFragment(FragmentSwitchHelper.WELCOME_FRAGMENT);
 	}
 
