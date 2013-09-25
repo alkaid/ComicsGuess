@@ -2,7 +2,7 @@ package com.coodroid.comicsguess.view.fragments;
 
 import java.util.Date;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.extern.baseView.BaseFragment;
 import com.coodroid.comicsguess.R;
+import com.coodroid.comicsguess.data.DBSql;
+import com.coodroid.comicsguess.data.WelcomeDAO;
 import com.coodroid.comicsguess.view.FragmentSwitchHelper;
 
 /**
@@ -22,13 +24,18 @@ import com.coodroid.comicsguess.view.FragmentSwitchHelper;
  */
 public class WelcomeFragment extends BaseFragment{
 	
-	private final long SHOWTIME = 2000l;
+	private final long SHOWTIME = 2000L;
+	private Activity mAct;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new InitTask().execute();
-		
+		mAct = getActivity();
+		//初始化数据以及随机题目的数据
+		WelcomeDAO dao = new WelcomeDAO(mAct);
+		dao.randomDBData();
 	}
 
 	@Override

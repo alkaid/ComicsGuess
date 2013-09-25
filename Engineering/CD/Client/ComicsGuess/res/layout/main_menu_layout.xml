@@ -51,7 +51,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dip"
-        android:layout_marginLeft="10dip"/>
+        android:layout_marginLeft="10dip"
+        android:text="设置"/>
 
         	<!-- 退出游戏的按钮 -->
     <Button 
@@ -61,5 +62,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dip"
-        android:layout_marginRight="10dip"/>
+        android:layout_marginRight="10dip"
+        android:text="退出"/>
 </RelativeLayout>
