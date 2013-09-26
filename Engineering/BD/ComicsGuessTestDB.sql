@@ -1,7 +1,7 @@
 /*
 Navicat SQLite Data Transfer
 
-Source Server         : CGDatabaseConn
+Source Server         : ComicsGuessTest
 Source Server Version : 30706
 Source Host           : :0
 
@@ -9,19 +9,77 @@ Target Server Type    : SQLite
 Target Server Version : 30706
 File Encoding         : 65001
 
-Date: 2013-09-05 10:29:33
+Date: 2013-09-26 11:15:51
 */
 
 PRAGMA foreign_keys = OFF;
 
--- ----------------------------
--- Table structure for "main"."catalog"
--- ----------------------------
-DROP TABLE "main"."catalog";
+--  ---------------------
+--  如果DB中已有表，打开下面的注释语句
+--  ----------------------
+--UPDATE "main"."stage" SET nearSubject=NULL;
+
+DROP TABLE IF EXISTS "main"."subject";
+DROP TABLE IF EXISTS "main"."stage";
+DROP TABLE IF EXISTS "main"."catalog";
+DROP TABLE IF EXISTS "main"."comicsType";
+DROP TABLE IF EXISTS "main"."stageType";
+DROP TABLE IF EXISTS "main"."subjectType";
+
 CREATE TABLE "catalog" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "name"  VARCHAR(10) NOT NULL
 );
+
+CREATE TABLE "comicsType" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"name"  VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE "stage" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"name"  VARCHAR(10) NOT NULL,
+"catalog"  INTEGER NOT NULL,
+"stageType"  INTEGER NOT NULL,
+"unlocked"  BOOLEAN NOT NULL DEFAULT false,
+"nearSubject"  INTEGER,
+CONSTRAINT "fkey0" FOREIGN KEY ("catalog") REFERENCES "catalog" ("id"),
+CONSTRAINT "fkey1" FOREIGN KEY ("stageType") REFERENCES "stageType" ("id"),
+CONSTRAINT "fkey2" FOREIGN KEY ("nearSubject") REFERENCES "subject" ("id")
+);
+
+CREATE TABLE "stageType" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"name"  varchar(10) NOT NULL
+);
+
+CREATE TABLE "subject" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"title"  VARCHAR(20),
+"subjectType"  INTEGER,
+"comicsType"  INTEGER,
+"stage"  INTEGER NOT NULL,
+"level"  INTEGER NOT NULL DEFAULT 0,
+"remark"  VARCHAR(100),
+"resImg"  VARCHAR(100),
+"resText"  VARCHAR(300),
+"resAudio"  VARCHAR(100),
+"creatdate"  DATE,
+"tip"  VARCHAR(100),
+"selectors"  VARCHAR(100),
+"answer"  VARCHAR(20) NOT NULL,
+"sorter"  INTEGER NOT NULL DEFAULT 0,
+"resolved"  BOOLEAN NOT NULL DEFAULT false,
+CONSTRAINT "fkey0" FOREIGN KEY ("subjectType") REFERENCES "subjectType" ("id"),
+CONSTRAINT "fkey1" FOREIGN KEY ("comicsType") REFERENCES "comicsType" ("id"),
+CONSTRAINT "fkey2" FOREIGN KEY ("stage") REFERENCES "stage" ("id") DEFERRABLE INITIALLY DEFERRED
+);
+
+CREATE TABLE "subjectType" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"name"  VARCHAR(10) NOT NULL
+);
+
 
 -- ----------------------------
 -- Records of catalog
@@ -29,15 +87,6 @@ CREATE TABLE "catalog" (
 INSERT INTO "main"."catalog" VALUES (1, '一周目');
 INSERT INTO "main"."catalog" VALUES (2, '二周目');
 INSERT INTO "main"."catalog" VALUES (3, '三周目');
-
--- ----------------------------
--- Table structure for "main"."comicsType"
--- ----------------------------
-DROP TABLE "main"."comicsType";
-CREATE TABLE "comicsType" (
-"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"name"  VARCHAR(20) NOT NULL
-);
 
 -- ----------------------------
 -- Records of comicsType
@@ -67,55 +116,6 @@ INSERT INTO "main"."comicsType" VALUES (22, '推理');
 INSERT INTO "main"."comicsType" VALUES (23, '吸血鬼');
 INSERT INTO "main"."comicsType" VALUES (24, '忍者');
 
--- ----------------------------
--- Table structure for "main"."sqlite_sequence"
--- ----------------------------
-DROP TABLE "main"."sqlite_sequence";
-CREATE TABLE sqlite_sequence(name,seq);
-
--- ----------------------------
--- Records of sqlite_sequence
--- ----------------------------
-INSERT INTO "main"."sqlite_sequence" VALUES ('catalog', 3);
-INSERT INTO "main"."sqlite_sequence" VALUES ('stageType', 2);
-INSERT INTO "main"."sqlite_sequence" VALUES ('catalog', 2);
-INSERT INTO "main"."sqlite_sequence" VALUES ('stage', 4);
-INSERT INTO "main"."sqlite_sequence" VALUES ('subjectType', 6);
-INSERT INTO "main"."sqlite_sequence" VALUES ('comicsType', 24);
-INSERT INTO "main"."sqlite_sequence" VALUES ('subject', 40);
-
--- ----------------------------
--- Table structure for "main"."stage"
--- ----------------------------
-DROP TABLE "main"."stage";
-CREATE TABLE "stage" (
-"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"name"  VARCHAR(10) NOT NULL,
-"catalog"  INTEGER NOT NULL,
-"stageType"  INTEGER NOT NULL,
-"unlocked"  BOOLEAN NOT NULL DEFAULT false,
-"nearSubject"  INTEGER,
-CONSTRAINT "fkey0" FOREIGN KEY ("catalog") REFERENCES "catalog" ("id"),
-FOREIGN KEY ("stageType") REFERENCES "stageType" ("id"),
-FOREIGN KEY ("nearSubject") REFERENCES "subject" ("id")
-);
-
--- ----------------------------
--- Records of stage
--- ----------------------------
-INSERT INTO "main"."stage" VALUES (1, '主线关卡1', 1, 1, 'true', null);
-INSERT INTO "main"."stage" VALUES (2, '火影忍者', 1, 2, 'false', 5);
-INSERT INTO "main"."stage" VALUES (3, '海贼王', 1, 2, 'false', 11);
-INSERT INTO "main"."stage" VALUES (4, '圣斗士星矢', 1, 2, 'false', 22);
-
--- ----------------------------
--- Table structure for "main"."stageType"
--- ----------------------------
-DROP TABLE "main"."stageType";
-CREATE TABLE "stageType" (
-"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"name"  varchar(10) NOT NULL
-);
 
 -- ----------------------------
 -- Records of stageType
@@ -123,31 +123,28 @@ CREATE TABLE "stageType" (
 INSERT INTO "main"."stageType" VALUES (1, '主线关卡');
 INSERT INTO "main"."stageType" VALUES (2, '主题关卡');
 
+
 -- ----------------------------
--- Table structure for "main"."subject"
+-- Records of subjectType
 -- ----------------------------
-DROP TABLE "main"."subject";
-CREATE TABLE "subject" (
-"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"title"  VARCHAR(20),
-"subjectType"  INTEGER,
-"comicsType"  INTEGER,
-"stage"  INTEGER NOT NULL,
-"level"  INTEGER NOT NULL DEFAULT 0,
-"remark"  VARCHAR(100),
-"resImg"  VARCHAR(100),
-"resText"  VARCHAR(300),
-"resAudio"  VARCHAR(100),
-"creatdate"  DATE,
-"tip"  VARCHAR(100),
-"selectors"  VARCHAR(100),
-"answer"  VARCHAR(20) NOT NULL,
-"sorter"  INTEGER NOT NULL DEFAULT 0,
-"resolved"  BOOLEAN NOT NULL DEFAULT false,
-CONSTRAINT "fkey0" FOREIGN KEY ("subjectType") REFERENCES "subjectType" ("id"),
-CONSTRAINT "fkey1" FOREIGN KEY ("comicsType") REFERENCES "comicsType" ("id"),
-CONSTRAINT "fkey2" FOREIGN KEY ("stage") REFERENCES "stage" ("id")
-);
+INSERT INTO "main"."subjectType" VALUES (1, '人物角色');
+INSERT INTO "main"."subjectType" VALUES (2, '动漫名称');
+INSERT INTO "main"."subjectType" VALUES (3, '人物声优');
+INSERT INTO "main"."subjectType" VALUES (4, '动漫作者');
+INSERT INTO "main"."subjectType" VALUES (5, '物品名称');
+INSERT INTO "main"."subjectType" VALUES (6, '绝招名称');
+
+
+
+-- ----------------------------
+-- Records of stage
+-- ----------------------------
+INSERT INTO "main"."stage" VALUES (1, '主线关卡1', 1, 1, 'true', null);
+INSERT INTO "main"."stage" VALUES (2, '火影忍者', 1, 2, 'false', null);
+INSERT INTO "main"."stage" VALUES (3, '海贼王', 1, 2, 'false', null);
+INSERT INTO "main"."stage" VALUES (4, '圣斗士星矢', 1, 2, 'false', null);
+
+
 
 -- ----------------------------
 -- Records of subject
@@ -223,21 +220,7 @@ INSERT INTO "main"."subject" VALUES (38, '自来也', 1, null, 2, 2, null, '1/gc
 INSERT INTO "main"."subject" VALUES (39, '春野樱', 1, null, 2, 3, null, '1/gc_img_39.jpg', null, null, null, '第一个字：春', null, '春野樱', 0, 'false');
 INSERT INTO "main"."subject" VALUES (40, '日向宁次', 1, null, 2, 5, null, '1/gc_img_40.jpg', null, null, null, '第一个字：日', null, '日向宁次', 0, 'false');
 
--- ----------------------------
--- Table structure for "main"."subjectType"
--- ----------------------------
-DROP TABLE "main"."subjectType";
-CREATE TABLE "subjectType" (
-"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"name"  VARCHAR(10) NOT NULL
-);
-
--- ----------------------------
--- Records of subjectType
--- ----------------------------
-INSERT INTO "main"."subjectType" VALUES (1, '人物角色');
-INSERT INTO "main"."subjectType" VALUES (2, '动漫名称');
-INSERT INTO "main"."subjectType" VALUES (3, '人物声优');
-INSERT INTO "main"."subjectType" VALUES (4, '动漫作者');
-INSERT INTO "main"."subjectType" VALUES (5, '物品名称');
-INSERT INTO "main"."subjectType" VALUES (6, '绝招名称');
+--  UPDATE stage's nearSubject DATA
+UPDATE "main"."stage" SET nearSubject=5 WHERE id=2;
+UPDATE "main"."stage" SET nearSubject=11 WHERE id=3;
+UPDATE "main"."stage" SET nearSubject=22 WHERE id=4;
