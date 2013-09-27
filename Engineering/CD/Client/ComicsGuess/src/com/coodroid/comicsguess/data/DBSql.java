@@ -143,7 +143,7 @@ public class DBSql extends BaseSQL {
 			InputStream is;
 			try {
 				is = context.getAssets().open("sql/ComicsGuessTestDB.sql");
-				execCreateTableSQLScript(is,db);
+				execSQLScript(db, is);
 			} catch (IOException e) {
 				LogUtil.e(e);
 			}
