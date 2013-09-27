@@ -1,23 +1,4 @@
-/*
-Navicat SQLite Data Transfer
-
-Source Server         : ComicsGuessTest
-Source Server Version : 30706
-Source Host           : :0
-
-Target Server Type    : SQLite
-Target Server Version : 30706
-File Encoding         : 65001
-
-Date: 2013-09-26 11:15:51
-*/
-
 PRAGMA foreign_keys = OFF;
-
---  ---------------------
---  如果DB中已有表，打开下面的注释语句
---  ----------------------
---UPDATE "main"."stage" SET nearSubject=NULL;
 
 DROP TABLE IF EXISTS "main"."subject";
 DROP TABLE IF EXISTS "main"."stage";
@@ -81,16 +62,10 @@ CREATE TABLE "subjectType" (
 );
 
 
--- ----------------------------
--- Records of catalog
--- ----------------------------
 INSERT INTO "main"."catalog" VALUES (1, '一周目');
 INSERT INTO "main"."catalog" VALUES (2, '二周目');
 INSERT INTO "main"."catalog" VALUES (3, '三周目');
 
--- ----------------------------
--- Records of comicsType
--- ----------------------------
 INSERT INTO "main"."comicsType" VALUES (1, '热血');
 INSERT INTO "main"."comicsType" VALUES (2, '科幻');
 INSERT INTO "main"."comicsType" VALUES (3, '神魔');
@@ -116,17 +91,9 @@ INSERT INTO "main"."comicsType" VALUES (22, '推理');
 INSERT INTO "main"."comicsType" VALUES (23, '吸血鬼');
 INSERT INTO "main"."comicsType" VALUES (24, '忍者');
 
-
--- ----------------------------
--- Records of stageType
--- ----------------------------
 INSERT INTO "main"."stageType" VALUES (1, '主线关卡');
 INSERT INTO "main"."stageType" VALUES (2, '主题关卡');
 
-
--- ----------------------------
--- Records of subjectType
--- ----------------------------
 INSERT INTO "main"."subjectType" VALUES (1, '人物角色');
 INSERT INTO "main"."subjectType" VALUES (2, '动漫名称');
 INSERT INTO "main"."subjectType" VALUES (3, '人物声优');
@@ -134,21 +101,11 @@ INSERT INTO "main"."subjectType" VALUES (4, '动漫作者');
 INSERT INTO "main"."subjectType" VALUES (5, '物品名称');
 INSERT INTO "main"."subjectType" VALUES (6, '绝招名称');
 
-
-
--- ----------------------------
--- Records of stage
--- ----------------------------
 INSERT INTO "main"."stage" VALUES (1, '主线关卡1', 1, 1, 'true', null);
 INSERT INTO "main"."stage" VALUES (2, '火影忍者', 1, 2, 'false', null);
 INSERT INTO "main"."stage" VALUES (3, '海贼王', 1, 2, 'false', null);
 INSERT INTO "main"."stage" VALUES (4, '圣斗士星矢', 1, 2, 'false', null);
 
-
-
--- ----------------------------
--- Records of subject
--- ----------------------------
 INSERT INTO "main"."subject" VALUES (1, '恶魔奶爸', 2, null, 1, 1, null, null, '【作品提示】 
 1、男主是个不良少年，却自认为是“英俊潇洒、心地善良的少年” 
 2、男主在河边捡到一个婴儿 
@@ -220,7 +177,6 @@ INSERT INTO "main"."subject" VALUES (38, '自来也', 1, null, 2, 2, null, '1/gc
 INSERT INTO "main"."subject" VALUES (39, '春野樱', 1, null, 2, 3, null, '1/gc_img_39.jpg', null, null, null, '第一个字：春', null, '春野樱', 0, 'false');
 INSERT INTO "main"."subject" VALUES (40, '日向宁次', 1, null, 2, 5, null, '1/gc_img_40.jpg', null, null, null, '第一个字：日', null, '日向宁次', 0, 'false');
 
---  UPDATE stage's nearSubject DATA
 UPDATE "main"."stage" SET nearSubject=5 WHERE id=2;
 UPDATE "main"."stage" SET nearSubject=11 WHERE id=3;
 UPDATE "main"."stage" SET nearSubject=22 WHERE id=4;

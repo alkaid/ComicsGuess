@@ -20,6 +20,7 @@ public class WelcomeDAO {
 	private void initDB(){
 		DBSql dbSQL = new DBSql(mContext);
 		dbSQL.init();
+		dbSQL.close();
 	}
 	
 	//随机排列题目的数据

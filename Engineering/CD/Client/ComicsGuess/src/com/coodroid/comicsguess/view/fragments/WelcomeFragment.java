@@ -33,9 +33,6 @@ public class WelcomeFragment extends BaseFragment{
 		super.onCreate(savedInstanceState);
 		new InitTask().execute();
 		mAct = getActivity();
-		//初始化数据以及随机题目的数据
-		WelcomeDAO dao = new WelcomeDAO(mAct);
-		dao.randomDBData();
 	}
 
 	@Override
@@ -57,6 +54,9 @@ public class WelcomeFragment extends BaseFragment{
 		protected Integer doInBackground(Void... params) {
 			//后台初始化全局
 			begin=new Date();
+			//初始化数据以及随机题目的数据
+			WelcomeDAO dao = new WelcomeDAO(mAct);
+			dao.randomDBData();
 			return null;
 		}
 		@Override
