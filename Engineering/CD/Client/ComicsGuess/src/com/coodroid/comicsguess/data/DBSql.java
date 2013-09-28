@@ -144,6 +144,7 @@ public class DBSql extends BaseSQL {
 			try {
 				is = context.getAssets().open("sql/ComicsGuessTestDB.sql");
 				execSQLScript(db, is);
+//				execCreateTableSQLScript(is, db);
 			} catch (IOException e) {
 				LogUtil.e(e);
 			}

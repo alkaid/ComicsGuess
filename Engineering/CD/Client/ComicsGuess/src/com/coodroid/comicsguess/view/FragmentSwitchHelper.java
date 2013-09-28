@@ -24,6 +24,7 @@ public class FragmentSwitchHelper {
 	private static FragmentSwitchHelper mInstance = null;
 	private FragmentActivity mAct = null;
 	private FragmentManager fm = null;
+	private String tag = null; 
 	
 	/**欢迎界面fragment*/
 	public final static String WELCOME_FRAGMENT = "WELCOME";
@@ -51,6 +52,14 @@ public class FragmentSwitchHelper {
 	public void init(FragmentActivity fAct){
 		mAct = fAct;
 		fm = fAct.getSupportFragmentManager();
+	}
+	
+	/**
+	 * 返回当前fragment的tag
+	 * @return
+	 */
+	public String getFragmentTag(){
+		return tag;
 	}
 	
 	/**
@@ -96,6 +105,8 @@ public class FragmentSwitchHelper {
 				ft.commit();
 			}
 		}
+		//标记当前正在显示的fragment是哪个
+		this.tag = tag;
 		return true;
 	}
 	

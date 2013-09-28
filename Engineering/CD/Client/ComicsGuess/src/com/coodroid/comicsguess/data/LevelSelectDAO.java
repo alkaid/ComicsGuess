@@ -14,14 +14,14 @@ import android.database.Cursor;
  * @author JiangYinzhi
  *
  */
-public class StageDAO {
+public class LevelSelectDAO {
 
-	private static StageDAO lDao = null;
+	private static LevelSelectDAO lDao = null;
 	private static DBSql db = null;
 	
-	public static StageDAO getInstance(Context context){
+	public static LevelSelectDAO getInstance(Context context){
 		if(lDao == null){
-			lDao = new StageDAO();
+			lDao = new LevelSelectDAO();
 		}
 		if(db == null){
 			db = new DBSql(context);
