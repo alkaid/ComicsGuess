@@ -42,29 +42,30 @@ public class MainGuessActivity extends Activity  {
         
         mGridContainer= (LinearLayout)findViewById(R.id.gridview_container);
         ArrayList<String> test = new ArrayList<String>();
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡"); 
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
-        test.add("卡");
+        test.add("毛");
+        test.add("虾");
+        test.add("傻");
+        test.add("逼");
+        test.add("虾");
+        test.add("虾"); 
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
   
         initKeysGrid(test);
 		
@@ -76,6 +77,8 @@ public class MainGuessActivity extends Activity  {
 	  private void initKeysGrid(ArrayList<String> paramArrayList)
 	  {
 	    keyGrid = ((GridView)this.mInflate.inflate(R.layout.key_grid, null));
+	   
+	
 	    mGridContainer.addView(this.keyGrid);
 	    mAdapter = new CGAnswerItemAdapter(getBaseContext(), paramArrayList);
 //	    this.mItemClickListener = new KeyClick(null);

@@ -86,20 +86,18 @@ public class CGAnswerItemAdapter extends BaseAdapter
     }else {
 		localView = paramView;
 	}
-    while (true)
-    {
+    
       TextView localTextView = (TextView)localView.findViewById(R.id.text);
       localTextView.setText((CharSequence)this.mKeyList.get(paramInt));
       CGAnswerButton localCGAnswerButton = new CGAnswerButton(localTextView);
       localCGAnswerButton.setTitle((String)this.mKeyList.get(paramInt));
       localCGAnswerButton.setPos(paramInt);
       localView.setTag(localCGAnswerButton);
-      if ((this.buttonList.contains(localView)) || (this.buttonList.size() > paramInt))
-        break;
+     
       this.buttonList.add(paramInt, localView);
-      return localView;
+     
 
-    }
+    
 	return localView;
   }
 
@@ -170,7 +168,7 @@ public class CGAnswerItemAdapter extends BaseAdapter
         return true;
       if (paramMotionEvent.getAction() == 0)
       {
-        ScaleAnimation localScaleAnimation1 = new ScaleAnimation(1.0F, 1.4F, 1.0F, 1.4F, 1, 0.5F, 1, 0.5F);
+        ScaleAnimation localScaleAnimation1 = new ScaleAnimation(1.0F, 1.3F, 1.0F, 1.3F, 1, 0.5F, 1, 0.5F);
         localScaleAnimation1.setDuration(50L);
         localScaleAnimation1.setFillAfter(true);
         localScaleAnimation1.setInterpolator(new LinearInterpolator());
@@ -181,11 +179,12 @@ public class CGAnswerItemAdapter extends BaseAdapter
         if ((paramMotionEvent.getAction() == MotionEvent.ACTION_UP ) || (paramMotionEvent.getAction() == MotionEvent.ACTION_CANCEL))
         {
          
-        ScaleAnimation localScaleAnimation2 = new ScaleAnimation(1.4F, 1.0F, 1.4F, 1.0F, 1, 0.5F, 1, 0.5F);
+        ScaleAnimation localScaleAnimation2 = new ScaleAnimation(1.3F, 1.0F, 1.3F, 1.0F, 1, 0.5F, 1, 0.5F);
         localScaleAnimation2.setDuration(50L);
         localScaleAnimation2.setFillAfter(true);
         localScaleAnimation2.setInterpolator(new LinearInterpolator());
 //        localScaleAnimation2.setAnimationListener(new MainGuessActivity.keyAnimListener(CGAnswerItemAdapter.this, paramView));
+        paramView.setVisibility(View.INVISIBLE);
         paramView.startAnimation(localScaleAnimation2);
         }
       

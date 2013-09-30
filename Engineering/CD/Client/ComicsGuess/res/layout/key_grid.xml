@@ -3,12 +3,14 @@
     android:id="@+id/answer_select_grid"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    
+    android:columnWidth="30.0dip"
 
-    android:columnWidth="35.0dip"
     android:gravity="center"
-    android:horizontalSpacing="5.0dip"
+    android:horizontalSpacing="5dip"
+   
     android:layoutAnimation="@anim/keysgrid_anim"
     android:listSelector="@null"
-    android:numColumns="8"
+    android:numColumns="6"
     android:stretchMode="columnWidth"
-    android:verticalSpacing="8.0dip" />
+    android:verticalSpacing="5.0dip" />
