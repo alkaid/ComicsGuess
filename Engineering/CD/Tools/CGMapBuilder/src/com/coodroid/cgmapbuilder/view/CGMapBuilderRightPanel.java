@@ -8,14 +8,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class CGMapBuilderRightPannel extends JPanel{
+public class CGMapBuilderRightPanel extends JPanel{
 
 	private JPanel stageInfoPanel;//关卡信息区域，显示
 	private JButton autoCreateMapBtn;//自动创建地图按钮
 	private JButton saveMapBtn;//保存当前地图按钮
 	private JButton resetMapBtn;//还原之前的地图
 	
-	public CGMapBuilderRightPannel() {
+	public CGMapBuilderRightPanel() {
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		createStageInfoArea();
 		autoCreateMapBtn = createBtn("生成地图");
