@@ -1,5 +1,7 @@
 package com.coodroid.comicsguess.view.ui;
 
+import android.opengl.Visibility;
+import android.view.View;
 import android.widget.TextView;
 
 public class CGAnswerButton
@@ -17,10 +19,10 @@ public class CGAnswerButton
   {
     if (paramBoolean.booleanValue())
     {
-      this.mButton.setVisibility(0);
+      this.mButton.setVisibility(View.VISIBLE);
       return;
     }
-    this.mButton.setVisibility(4);
+    this.mButton.setVisibility(View.INVISIBLE);
   }
 
   public void clickHandler()

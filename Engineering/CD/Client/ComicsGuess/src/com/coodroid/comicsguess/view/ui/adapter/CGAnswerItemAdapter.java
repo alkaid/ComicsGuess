@@ -2,6 +2,7 @@ package com.coodroid.comicsguess.view.ui.adapter;
 
 import java.util.ArrayList;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,11 +14,12 @@ import android.view.animation.ScaleAnimation;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.coodroid.comicsguess.R;
 import com.coodroid.comicsguess.view.ui.CGAnswerButton;
 
 public class CGAnswerItemAdapter extends BaseAdapter
 {
-  private static int ITEM_COUNT = 24;
+  private static int ITEM_COUNT = 20;
   private ArrayList<View> buttonList;
   private Context mCtx;
  
@@ -73,29 +75,29 @@ public class CGAnswerItemAdapter extends BaseAdapter
     View localView = null;
     if (paramInt >= this.mKeyList.size())
     {
-      new View(this.mCtx).setVisibility(4);
+      new View(this.mCtx).setVisibility(View.INVISIBLE);
       localView = new View(this.mCtx);
       return localView;
     }
     if (paramView == null)
     {
-      localView = ((LayoutInflater)this.mCtx.getSystemService("layout_inflater")).inflate(2130903043, null);
+      localView = ((LayoutInflater)this.mCtx.getSystemService("layout_inflater")).inflate(R.layout.button_text, null);
       localView.setOnTouchListener(new onKeyTouchListener());
-    }
-    while (true)
-    {
-      TextView localTextView = (TextView)localView.findViewById(2131099680);
+    }else {
+		localView = paramView;
+	}
+    
+      TextView localTextView = (TextView)localView.findViewById(R.id.text);
       localTextView.setText((CharSequence)this.mKeyList.get(paramInt));
       CGAnswerButton localCGAnswerButton = new CGAnswerButton(localTextView);
       localCGAnswerButton.setTitle((String)this.mKeyList.get(paramInt));
       localCGAnswerButton.setPos(paramInt);
       localView.setTag(localCGAnswerButton);
-      if ((this.buttonList.contains(localView)) || (this.buttonList.size() > paramInt))
-        break;
+     
       this.buttonList.add(paramInt, localView);
-      return localView;
+     
 
-    }
+    
 	return localView;
   }
 
@@ -166,24 +168,26 @@ public class CGAnswerItemAdapter extends BaseAdapter
         return true;
       if (paramMotionEvent.getAction() == 0)
       {
-        ScaleAnimation localScaleAnimation1 = new ScaleAnimation(1.0F, 1.4F, 1.0F, 1.4F, 1, 0.5F, 1, 0.5F);
+        ScaleAnimation localScaleAnimation1 = new ScaleAnimation(1.0F, 1.3F, 1.0F, 1.3F, 1, 0.5F, 1, 0.5F);
         localScaleAnimation1.setDuration(50L);
         localScaleAnimation1.setFillAfter(true);
         localScaleAnimation1.setInterpolator(new LinearInterpolator());
         paramView.startAnimation(localScaleAnimation1);
       }
-//      while (true)
-//      {
-//        return true;
-//        if ((paramMotionEvent.getAction() != 1) && (paramMotionEvent.getAction() != 3))
-//          continue;
-//        ScaleAnimation localScaleAnimation2 = new ScaleAnimation(1.4F, 1.0F, 1.4F, 1.0F, 1, 0.5F, 1, 0.5F);
-//        localScaleAnimation2.setDuration(50L);
-//        localScaleAnimation2.setFillAfter(true);
-//        localScaleAnimation2.setInterpolator(new LinearInterpolator());
+  
+
+        if ((paramMotionEvent.getAction() == MotionEvent.ACTION_UP ) || (paramMotionEvent.getAction() == MotionEvent.ACTION_CANCEL))
+        {
+         
+        ScaleAnimation localScaleAnimation2 = new ScaleAnimation(1.3F, 1.0F, 1.3F, 1.0F, 1, 0.5F, 1, 0.5F);
+        localScaleAnimation2.setDuration(50L);
+        localScaleAnimation2.setFillAfter(true);
+        localScaleAnimation2.setInterpolator(new LinearInterpolator());
 //        localScaleAnimation2.setAnimationListener(new MainGuessActivity.keyAnimListener(CGAnswerItemAdapter.this, paramView));
-//        paramView.startAnimation(localScaleAnimation2);
-//      }
+        paramView.setVisibility(View.INVISIBLE);
+        paramView.startAnimation(localScaleAnimation2);
+        }
+      
 	return true;
     }
   }

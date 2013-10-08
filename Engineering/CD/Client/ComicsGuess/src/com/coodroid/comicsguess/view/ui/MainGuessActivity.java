@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ import com.alkaid.base.extern.baseView.BaseFragmentActivity;
 import com.coodroid.comicsguess.R;
 import com.coodroid.comicsguess.view.ui.adapter.CGAnswerItemAdapter;
 
-public class MainGuessActivity extends BaseFragmentActivity  {
+public class MainGuessActivity extends Activity  {
 	
 	private CGAnswerItemAdapter mAdapter;
 	private KeyClick mItemClickListener;
@@ -34,14 +35,40 @@ public class MainGuessActivity extends BaseFragmentActivity  {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         this.mInflate = ((LayoutInflater)getSystemService("layout_inflater"));
         
         
         mGridContainer= (LinearLayout)findViewById(R.id.gridview_container);
-//        initKeysGrid();
-		super.onCreate(savedInstanceState);
+        ArrayList<String> test = new ArrayList<String>();
+        test.add("毛");
+        test.add("虾");
+        test.add("傻");
+        test.add("逼");
+        test.add("虾");
+        test.add("虾"); 
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+        test.add("虾");
+  
+        initKeysGrid(test);
+		
 	}
 	
 	
@@ -50,6 +77,8 @@ public class MainGuessActivity extends BaseFragmentActivity  {
 	  private void initKeysGrid(ArrayList<String> paramArrayList)
 	  {
 	    keyGrid = ((GridView)this.mInflate.inflate(R.layout.key_grid, null));
+	   
+	
 	    mGridContainer.addView(this.keyGrid);
 	    mAdapter = new CGAnswerItemAdapter(getBaseContext(), paramArrayList);
 //	    this.mItemClickListener = new KeyClick(null);
